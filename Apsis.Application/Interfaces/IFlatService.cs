@@ -8,13 +8,7 @@ using System.Threading.Tasks;
 
 namespace Apsis.Application.Interfaces
 {
-    public interface IFlatService
+    public interface IFlatService : IService<FlatViewDto>
     {
-        Task Add(FlatViewDto entity);
-        void Delete(FlatViewDto entitiy);
-        void Update(FlatViewDto entity);
-        Task<List<FlatViewDto>> GetAll();
-        Task<List<FlatViewDto>> Get(Expression<Func<FlatViewDto, bool>> filter);
-
     }
 }
