@@ -35,11 +35,28 @@ namespace Apsis.Application
             services.AddScoped<IUnitofWork, UnitofWork>();
             services.AddScoped<IFlatService, FlatService>();
             services.AddScoped<IFlatRepository, FlatRepository>();
+            services.AddScoped<IBillService, BillService>();
+            services.AddScoped<IBillRepository, BillRepository>();
+            services.AddScoped<IBlockService, BlockService>();
+            services.AddScoped<IBlockRepository, BlockRepository>();
+            services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<ISubscriptionService, SubscriptionService>();
+            services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+
 
             var mappingConfig = new MapperConfiguration(cfg => 
             {
                 cfg.AddExpressionMapping();
                 cfg.AddProfile(new FlatProfile());
+                cfg.AddProfile(new BillProfile());
+                cfg.AddProfile(new BlockProfile());
+                cfg.AddProfile(new MessageProfile());
+                cfg.AddProfile(new SubscriptionProfile());
+                cfg.AddProfile(new UserProfile());
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);

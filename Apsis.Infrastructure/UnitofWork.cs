@@ -11,10 +11,22 @@ namespace Apsis.Infrastructure
     public class UnitofWork : IUnitofWork
     {
         public IFlatRepository Flat { get; }
+        public IBillRepository Bill { get; }
+        public IBlockRepository Block { get; }
+        public IMessageRepository Message { get; }
+        public ISubscriptionRepository Subscription { get; }
+        public IUserRepository User { get; }
+
         private readonly ApsisDbContext _context;
-        public UnitofWork(ApsisDbContext context, IFlatRepository flatRepository)
+        public UnitofWork(ApsisDbContext context, IFlatRepository flatRepository, IBillRepository billRepository, IBlockRepository blockRepository,
+            IMessageRepository messageRepository,ISubscriptionRepository subscriptionRepository, IUserRepository userRepository)
         {
             Flat = flatRepository;
+            Bill = billRepository;
+            Block = blockRepository;
+            Message = messageRepository;
+            Subscription = subscriptionRepository;
+            User = userRepository;
             _context = context;
         }
 
