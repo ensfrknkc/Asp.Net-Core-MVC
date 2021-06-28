@@ -1,3 +1,5 @@
+using Apsis.PaymentService.Configuration;
+using Apsis.PaymentService.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,6 +46,9 @@ namespace Apsis.PaymentService
                     ClockSkew = TimeSpan.Zero
                 };
             });
+
+            services.Configure<MongoDbConfiguration>(Configuration.GetSection("Mongo"));
+            services.AddScoped<CreditCardService>();
 
             services.AddSwaggerGen(c =>
             {

@@ -31,6 +31,7 @@ namespace Apsis.Application.Services
         public void Delete(FlatViewDto entitiy)
         {
             _unitofWork.Flat.Delete(_mapper.Map<Flat>(entitiy));
+            _unitofWork.SaveChangesAsync();
         }
 
         public async Task<List<FlatViewDto>> GetAll()
@@ -49,6 +50,7 @@ namespace Apsis.Application.Services
         public void Update(FlatViewDto entity)
         {
             _unitofWork.Flat.Update(_mapper.Map<Flat>(entity));
+            _unitofWork.SaveChangesAsync();
         }
     }
 }
