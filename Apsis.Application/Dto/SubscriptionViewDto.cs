@@ -11,5 +11,6 @@ namespace Apsis.Application.Dto
         public int Id { get; set; }
         public int FlatId { get; set; }
         public float Amount { get; set; }
+        public bool Status { get; set; }
     }
 }

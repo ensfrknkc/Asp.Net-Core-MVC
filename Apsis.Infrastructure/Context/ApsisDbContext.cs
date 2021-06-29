@@ -15,6 +15,7 @@ namespace Apsis.Infrastructure.Context
         {
         }
         //Identity User ı görmezse db set ile ekle
+
         public DbSet<Flat> Flats { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Bill> Bills { get; set; }

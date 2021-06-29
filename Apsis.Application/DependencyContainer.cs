@@ -9,6 +9,7 @@ using Apsis.Infrastructure.Context;
 using Apsis.Infrastructure.Repositories;
 using AutoMapper;
 using AutoMapper.Extensions.ExpressionMapping;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,7 +30,9 @@ namespace Apsis.Application
             options.UseSqlServer(configuration.GetConnectionString("Default"))
             .UseLazyLoadingProxies());
 
-            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddDefaultUI()
+                .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApsisDbContext>();
 
             services.AddScoped<IUnitofWork, UnitofWork>();

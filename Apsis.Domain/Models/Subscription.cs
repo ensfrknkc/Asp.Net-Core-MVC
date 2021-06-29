@@ -12,6 +12,7 @@ namespace Apsis.Domain.Models
         public int Id { get; set; }
         public virtual Flat Flat { get; set; }
         public float Amount { get; set; }
+        public bool Status { get; set; }
 
     }
 }

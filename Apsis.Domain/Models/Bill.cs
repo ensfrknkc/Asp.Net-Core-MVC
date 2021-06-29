@@ -14,5 +14,6 @@ namespace Apsis.Domain.Models
         public string BillType { get; set; }
         public int Month { get; set; }
         public int Year { get; set; }
+        public bool Status { get; set; }
     }
 }

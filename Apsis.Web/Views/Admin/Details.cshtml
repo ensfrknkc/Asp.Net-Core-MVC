@@ -1,0 +1,46 @@
+﻿@model List<string>
+
+@{ ViewData["Title"] = "Details"; }
+
+<h3 class="text-center">User: <b>@ViewBag.UserName</b></h3>
+<hr />
+
+@await Html.PartialAsync("_TopMenuPartial")
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            @if (Model.Count == 0)
+            {
+<p>No roles found!</p> }
+else
+{
+<h3 class="text-center">Roles</h3>
+
+                <table class="table">
+                    <thead class="bg-dark text-white">
+                        <tr>
+                            <th>Role Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var r in Model)
+                        {
+        <tr>
+            <td>@r</td>
+            <td>
+                <a class="btn btn-outline-danger"
+                   asp-route-role="@r"
+                   asp-route-userName="@ViewBag.UserName"
+                   asp-action="RemoveUserRole"
+                   onclick="return confirm('Are you sure to remove this role from user?')">Remove Role</a>
+            </td>
+        </tr>
+}
+                    </tbody>
+                </table>}
+        </div>
+    </div>
+</div>
+
