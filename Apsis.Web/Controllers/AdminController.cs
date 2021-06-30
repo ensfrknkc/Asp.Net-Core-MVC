@@ -1,5 +1,6 @@
 ﻿using Apsis.Domain.Models;
 using Apsis.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,15 +11,18 @@ using System.Threading.Tasks;
 
 namespace Apsis.Web.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AdminController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public AdminController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
@@ -51,7 +55,7 @@ namespace Apsis.Web.Controllers
         public IActionResult DisplayRoles()
         {
             var roles = _roleManager.Roles.ToList();
-
+            
             return View(roles);
         }
 
@@ -95,6 +99,33 @@ namespace Apsis.Web.Controllers
             var result = await _roleManager.DeleteAsync(roleToDelete);
 
             return RedirectToAction(nameof(DisplayRoles));
+        }
+
+        [HttpGet]
+        public IActionResult AddUser()
+        {
+            var users = _userManager.Users.ToList();
+            ViewBag.AllUsers = new List<User>(users);
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddUser(UserViewModel model)
+        {
+            IdentityResult result = await _userManager.CreateAsync(new User
+            {
+                Name = model.Name,
+                UserName = model.UserName,
+                Surname = model.Surname,
+                IdentificationNumber = model.IdentificationNumber,
+                PhoneNumber = model.PhoneNumber,
+                Email = model.Email
+            }, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("AddUser");
+            }
+            else return RedirectToAction("AddUser");
+
         }
     }
 }
