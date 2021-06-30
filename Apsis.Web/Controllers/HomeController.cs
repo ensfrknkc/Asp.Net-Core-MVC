@@ -28,18 +28,6 @@ namespace Apsis.Web.Controllers
         {
             return View();
         }
-        public IActionResult Login()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> Login(string userName, string password)
-        {
-            var result = await _signInManager.PasswordSignInAsync(userName, password, false, false);
-            if (!result.Succeeded) return RedirectToAction("Login");
-            return RedirectToAction("Index", "Home");;
-        }
-
         public IActionResult Privacy()
         {
             return View();

@@ -33,6 +33,11 @@ namespace Apsis.Web
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.RegisterApsis(Configuration);
             services.AddControllersWithViews();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Auth/Login";
+                options.AccessDeniedPath = $"/Auth/AccessDenied";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

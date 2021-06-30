@@ -48,27 +48,27 @@
         <h3 class="text-center">Kullanıcılar</h3>
         @if (ViewBag.AllUsers == null)
         {
-            <p>Kullanıcı bulunamadı...</p> }
+        <p>Kullanıcı bulunamadı...</p> }
         else
         {
-            <table class="table">
-                <thead class="bg-dark text-white">
+        <table class="table">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>Ad</th>
+                    <th>Soyad</th>
+                    <th>E-Mail</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var User in ViewBag.AllUsers)
+                {
                     <tr>
-                        <th>Ad</th>
-                        <th>Soyad</th>
-                        <th>E-Mail</th>
+                        <td>@User.Name</td>
+                        <td>@User.Surname</td>
+                        <td>@User.Email</td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var User in ViewBag.AllUsers)
-                    {
-                        <tr>
-                            <td>@User.Name</td>
-                            <td>@User.Surname</td>
-                            <td>@User.Email</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>}
+                 }
+            </tbody>
+        </table>}
     </div>
 </div>

@@ -100,32 +100,5 @@ namespace Apsis.Web.Controllers
 
             return RedirectToAction(nameof(DisplayRoles));
         }
-
-        [HttpGet]
-        public IActionResult AddUser()
-        {
-            var users = _userManager.Users.ToList();
-            ViewBag.AllUsers = new List<User>(users);
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> AddUser(UserViewModel model)
-        {
-            IdentityResult result = await _userManager.CreateAsync(new User
-            {
-                Name = model.Name,
-                UserName = model.UserName,
-                Surname = model.Surname,
-                IdentificationNumber = model.IdentificationNumber,
-                PhoneNumber = model.PhoneNumber,
-                Email = model.Email
-            }, model.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("AddUser");
-            }
-            else return RedirectToAction("AddUser");
-
-        }
     }
 }
