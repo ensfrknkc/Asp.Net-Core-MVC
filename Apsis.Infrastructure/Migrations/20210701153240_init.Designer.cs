@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Apsis.Infrastructure.Migrations
 {
     [DbContext(typeof(ApsisDbContext))]
-    [Migration("20210629180639_identitysecond")]
-    partial class identitysecond
+    [Migration("20210701153240_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,7 +100,9 @@ namespace Apsis.Infrastructure.Migrations
 
                     b.HasIndex("BlockId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Flats");
                 });
@@ -378,8 +380,8 @@ namespace Apsis.Infrastructure.Migrations
                         .HasForeignKey("BlockId");
 
                     b.HasOne("Apsis.Domain.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .WithOne("Flat")
+                        .HasForeignKey("Apsis.Domain.Models.Flat", "UserId");
 
                     b.Navigation("Block");
 
@@ -469,6 +471,8 @@ namespace Apsis.Infrastructure.Migrations
 
             modelBuilder.Entity("Apsis.Domain.Models.User", b =>
                 {
+                    b.Navigation("Flat");
+
                     b.Navigation("Message");
                 });
 #pragma warning restore 612, 618

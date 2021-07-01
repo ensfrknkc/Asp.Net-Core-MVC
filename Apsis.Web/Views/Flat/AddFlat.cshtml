@@ -1,0 +1,91 @@
+﻿@model FlatViewDto
+
+
+<h3 class="text-center">Daire Yönetimi</h3>
+<hr />
+
+@await Html.PartialAsync("_TopMenuPartial")
+
+
+<div class="row">
+    <div class="col-6">
+        <h3 class="text-center">Daire Ekle</h3>
+        <form asp-action="AddFlat" method="post">
+            <div class="form-group">
+                <label>Kullanıcı</label>
+                <select asp-for="UserId" asp-items="@ViewBag.Users" class="form-control">
+                    <option selected disabled>--Kullanıcı Seçimi--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Blok</label>
+                <select asp-for="BlockId" asp-items="@ViewBag.BlockList" class="form-control">
+                    <option selected disabled>--Blok Seçimi--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Durum</label>
+                <input asp-for="Status" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Oda Sayısı</label>
+                <input asp-for="NumberOfRooms" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Kat</label>
+                <input asp-for="Floor" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Daire Numarası</label>
+                <input asp-for="FlatNo" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Ev Sahibi - Kiracı</label>
+                <select asp-for="OwnerUser" class="form-control">
+                    <option selected disabled>--Ev Sahibi Seçimi--</option>
+                    <option value="EvSahibi">Ev Sahibi</option>
+                    <option value="Kiracı">Kiracı</option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-outline-primary btn-block" value="Ekle" />
+                <a asp-action="Index" class="btn btn-outline-danger btn-block">Vazgeç</a>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="col-6" style="border-left:1px solid black;">
+        <h3 class="text-center">Daireler</h3>
+        @if (ViewBag.Flats.Count == 0)
+        {
+        <p>Henüz eklenmiş daire bulunmamaktadır...</p> }
+        else
+        {
+        <table class="table">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>Blok Id</th>
+                    <th>Durum</th>
+                    <th>Oda Sayısı</th>
+                    <th>Kat</th>
+                    <th>Kapı Numarası</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var flat in ViewBag.Flats)
+                {
+                <tr>
+                    <td>@flat.BlockId</td>
+                    <td>@flat.Status</td>
+                    <td>@flat.NumberOfRooms</td>
+                    <td>@flat.Floor</td>
+                    <td>@flat.FlatNo</td>
+                </tr>                
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
+

@@ -15,5 +15,6 @@ namespace Apsis.Domain.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Plate { get; set; }
+        public virtual Flat Flat { get; set; }
     }
 }

@@ -1,0 +1,52 @@
+﻿@model BlockViewDto
+
+@{ ViewData["Title"] = "All Roles"; }
+
+<h3 class="text-center">Role Yönetimi</h3>
+<hr />
+
+@await Html.PartialAsync("_TopMenuPartial")
+
+
+<div class="row">
+    <div class="col-6">
+        <h3 class="text-center">Blok Ekle</h3>
+        <form asp-action="AddBlock" method="Post">
+            <div class="form-group">
+                <label>Blok ismi giriniz</label>
+                <input asp-for="Name" class="form-control" placeholder="Blok ismi giriniz..." />
+                <br />
+                <input type="submit" value="Ekle" class="btn btn-outline-primary btn-block" />
+                <a asp-action="Index" class="btn btn-outline-danger btn-block">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="col-6" style="border-left:1px solid black;">
+        <h3 class="text-center">Bloklar</h3>
+        @if (ViewBag.Blocks.Count == 0)
+        {
+        <p>Henüz eklenmiş blok bulunmamaktadır...</p>
+        }
+        else
+        {
+        <table class="table">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>Blok Adı</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var block in ViewBag.Blocks)
+                {
+                <tr>
+                    <td>@block.Name</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
+

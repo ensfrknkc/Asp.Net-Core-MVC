@@ -39,14 +39,14 @@
                 <input asp-for="Password" class="form-control" type="password" />
             </div>
             <div>
-                <input type="submit" class="btn btn-outline-primary btn-block" value="Kaydet" />
-
+                <input type="submit" class="btn btn-outline-primary btn-block" value="Ekle" />
+                <a asp-action="Index" class="btn btn-outline-danger btn-block">Vazgeç</a>
             </div>
         </form>
     </div>
     <div class="col-6" style="border-left:1px solid black;">
         <h3 class="text-center">Kullanıcılar</h3>
-        @if (ViewBag.AllUsers == null)
+        @if (ViewBag.AllUsers.Count == 0)
         {
         <p>Kullanıcı bulunamadı...</p> }
         else
@@ -65,7 +65,7 @@
                     <tr>
                         <td>@User.Name</td>
                         <td>@User.Surname</td>
-                        <td>@User.Email</td>
+                        <td>@User.Email</td>       
                     </tr>
                  }
             </tbody>

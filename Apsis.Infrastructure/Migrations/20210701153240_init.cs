@@ -26,7 +26,7 @@ namespace Apsis.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    IdentificationNumber = table.Column<int>(type: "int", nullable: false),
+                    IdentificationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Plate = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -319,7 +319,9 @@ namespace Apsis.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Flats_UserId",
                 table: "Flats",
-                column: "UserId");
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_UserId",
