@@ -1,0 +1,95 @@
+﻿@model BillViewDto
+
+
+<h3 class="text-center">Role Yönetimi</h3>
+<hr />
+
+@await Html.PartialAsync("_TopMenuPartial")
+
+
+<div class="row">
+    <div class="col-6">
+        <h3 class="text-center">Blok Ekle</h3>
+        <form asp-action="AddBill" method="Post">
+            <div class="form-group">
+                <label>Daire</label>
+                <select asp-for="FlatId" asp-items="@ViewBag.Flats" class="form-control">
+                    <option selected disabled>--Daire Seçimi--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Tutar</label>
+                <input asp-for="Amount" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Fatura Tipi</label>
+                <select asp-for="BillType" class="form-control">
+                    <option selected disabled>--Fatura Seçimi--</option>
+                    <option value="Elektrik">Elektrik</option>
+                    <option value="Su">Su</option>
+                    <option value="Doğalgaz">Doğalgaz</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Ay</label>
+                <select asp-for="Month" class="form-control">
+                    <option selected value='1'>Ocak</option>
+                    <option value='2'>Şubat</option>
+                    <option value='3'>Mart</option>
+                    <option value='4'>Nisan</option>
+                    <option value='5'>Mayıs</option>
+                    <option value='6'>Haziran</option>
+                    <option value='7'>Temmuz</option>
+                    <option value='8'>Ağustos</option>
+                    <option value='9'>Eylül</option>
+                    <option value='10'>Ekim</option>
+                    <option value='11'>Kasım</option>
+                    <option value='12'>Aralık</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Yıl</label>
+                <input asp-for="Year" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ekle" class="btn btn-outline-primary btn-block" />
+                <a asp-action="Index" class="btn btn-outline-danger btn-block">Vazgeç</a>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="col-6" style="border-left:1px solid black;">
+        <h3 class="text-center">Faturalar</h3>
+        @if (ViewBag.Bills.Count == 0)
+        {
+        <p>Henüz eklenmiş Fatura bulunmamaktadır...</p> }
+        else
+        {
+        <table class="table">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>Daire Id</th>
+                    <th>Tutar</th>
+                    <th>Fatura Tipi</th>
+                    <th>Ay</th>
+                    <th>Yıl</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var bill in ViewBag.Bills)
+                {
+                <tr>
+                    <td>@bill.FlatId</td>
+                    <td>@bill.Amount</td>
+                    <td>@bill.BillType</td>
+                    <td>@bill.Month</td>
+                    <td>@bill.Year</td>
+                </tr>                
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
+

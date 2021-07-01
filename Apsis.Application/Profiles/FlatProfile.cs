@@ -14,6 +14,7 @@ namespace Apsis.Application.Profiles
         public FlatProfile()
         {
             CreateMap<FlatViewDto, Flat>().ReverseMap();
+            CreateMap<Flat, FlatViewDto>().ReverseMap();
             
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Apsis.Domain.Models;
 using Apsis.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Apsis.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AuthController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -19,7 +21,7 @@ namespace Apsis.Web.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
@@ -64,7 +66,7 @@ namespace Apsis.Web.Controllers
             }
             else return RedirectToAction("AddUser");
         }
-
+        [Authorize]
         public IActionResult AccessDenied()
         {
             return View();

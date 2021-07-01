@@ -20,6 +20,5 @@ namespace Apsis.Application.Dto
         public int Floor { get; set; }
         public int FlatNo { get; set; }
         public string OwnerUser { get; set; }
-        public string BlockName { get; set; }
     }
 }

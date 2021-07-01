@@ -16,7 +16,8 @@ namespace Apsis.Domain.Models
         public virtual User User { get; set; }
         public virtual ICollection<Subscription> Subscription { get; set; }
         public virtual ICollection<Bill>  Bill { get; set; }
-        public virtual Block Block { get; set; }
+        [ForeignKey("BlockId")]
+        public int BlockId { get; set; }      
         public bool Status { get; set; }
         public string NumberOfRooms { get; set; }
         public int Floor { get; set; }

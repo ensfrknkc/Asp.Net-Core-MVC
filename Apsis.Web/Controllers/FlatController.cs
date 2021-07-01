@@ -2,6 +2,7 @@
 using Apsis.Application.Interfaces;
 using Apsis.Domain.Models;
 using Apsis.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Apsis.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class FlatController : Controller
     {
         private readonly IBlockService _blockService;

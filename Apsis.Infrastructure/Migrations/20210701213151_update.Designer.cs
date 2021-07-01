@@ -4,14 +4,16 @@ using Apsis.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Apsis.Infrastructure.Migrations
 {
     [DbContext(typeof(ApsisDbContext))]
-    partial class ApsisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210701213151_update")]
+    partial class update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,7 +34,7 @@ namespace Apsis.Infrastructure.Migrations
                     b.Property<string>("BillType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FlatId")
+                    b.Property<int?>("FlatId")
                         .HasColumnType("int");
 
                     b.Property<int>("Month")
@@ -364,16 +366,16 @@ namespace Apsis.Infrastructure.Migrations
 
             modelBuilder.Entity("Apsis.Domain.Models.Bill", b =>
                 {
-                    b.HasOne("Apsis.Domain.Models.Flat", null)
+                    b.HasOne("Apsis.Domain.Models.Flat", "Flat")
                         .WithMany("Bill")
-                        .HasForeignKey("FlatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FlatId");
+
+                    b.Navigation("Flat");
                 });
 
             modelBuilder.Entity("Apsis.Domain.Models.Flat", b =>
                 {
-                    b.HasOne("Apsis.Domain.Models.Block", null)
+                    b.HasOne("Apsis.Domain.Models.Block", "Block")
                         .WithMany("Flats")
                         .HasForeignKey("BlockId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -382,6 +384,8 @@ namespace Apsis.Infrastructure.Migrations
                     b.HasOne("Apsis.Domain.Models.User", "User")
                         .WithOne("Flat")
                         .HasForeignKey("Apsis.Domain.Models.Flat", "UserId");
+
+                    b.Navigation("Block");
 
                     b.Navigation("User");
                 });

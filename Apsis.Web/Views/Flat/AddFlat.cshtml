@@ -19,7 +19,8 @@
             </div>
             <div class="form-group">
                 <label>Blok</label>
-                <select asp-for="BlockId" asp-items="@ViewBag.BlockList" class="form-control">
+                @*@Html.DropDownList("BlockId", new SelectList(ViewBag.BlockList, "Id", "UserName"))*@
+                <select asp-for="BlockId"  asp-items="@ViewBag.BlockList" class="form-control">
                     <option selected disabled>--Blok Seçimi--</option>
                 </select>
             </div>
