@@ -1,15 +1,15 @@
-﻿@model UserViewModel
+﻿@model User
 
-
-<h3 class="text-center">Kullanıcı Yönetimi</h3>
+<h3 class="text-center">Kullanıcı Update</h3>
 <hr />
 
 @await Html.PartialAsync("_TopMenuPartial")
 
 <div class="row">
-    <div class="col-6">
+    <div class="col-12">
         <h3 class="text-center">Kullanıcı Ekle</h3>
-        <form asp-action="AddUser" method="post">
+        <form asp-action="Update" method="post">
+            <input asp-for="Id" class="form-control" type="hidden" value="@Model.Id" />
             <div class="form-group">
                 <label class="control-label"> Ad</label>
                 <input asp-for="Name" class="form-control" />
@@ -36,39 +36,12 @@
             </div>
             <div class="form-group">
                 <label class="control-label"> Şifre</label>
-                <input asp-for="Password" class="form-control" type="password" />
+                <input asp-for="PasswordHash" class="form-control" />
             </div>
             <div>
-                <input type="submit" class="btn btn-outline-primary btn-block" value="Ekle" />
+                <input type="submit" class="btn btn-outline-primary btn-block" value="Güncelle" />
                 <a asp-action="Index" class="btn btn-outline-danger btn-block">Vazgeç</a>
             </div>
         </form>
-    </div>
-    <div class="col-6" style="border-left:1px solid black;">
-        <h3 class="text-center">Kullanıcılar</h3>
-        @if (ViewBag.AllUsers.Count == 0)
-        {
-        <p>Kullanıcı bulunamadı...</p> }
-        else
-        {
-        <table class="table">
-            <thead class="bg-dark text-white">
-                <tr>
-                    <th>Ad</th>
-                    <th>Soyad</th>
-                    <th>E-Mail</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var User in ViewBag.AllUsers)
-                {
-                    <tr>
-                        <td>@User.Name</td>
-                        <td>@User.Surname</td>
-                        <td>@User.Email</td>       
-                    </tr>
-                 }
-            </tbody>
-        </table>}
     </div>
 </div>

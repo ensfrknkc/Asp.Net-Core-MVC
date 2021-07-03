@@ -18,20 +18,35 @@
             {
                 <table class="table">
                     <thead class="bg-dark text-white">
-                        <tr>
-                            <th>UserName</th>
-                            <th>Action</th>
+                        <tr class="text-center">
+                            <th >UserName</th>
+                            <th>İsim</th>
+                            <th>Soyisim</th>
+                            <th>Email</th>
+                            <th>Role Detail</th>
+                            <th>Sil</th>
+                            <th>Güncelle</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var user in Model)
                         {
-                            <tr>
-                                <td>@user.UserName</td>
-                                <td>
-                                    <a class="btn btn-success" asp-route-userId="@user.Id" asp-action="Details"> View Details</a>
-                                </td>
-                            </tr>
+                        <tr class="text-center">
+                            <td>@user.UserName</td>
+                            <td>@user.Name</td>
+                            <td>@user.Surname</td>
+                            <td>@user.Email</td>
+                            <td>
+                                <a class="btn btn-success" asp-route-userId="@user.Id" asp-action="Details"> View Details</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-success" asp-route-userId="@user.Id" asp-action="Delete"> Delete</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-success" asp-route-userId="@user.Id" asp-action="Update"> Güncelle</a>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

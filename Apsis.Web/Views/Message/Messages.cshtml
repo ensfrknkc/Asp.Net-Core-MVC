@@ -1,0 +1,39 @@
+﻿@model List<MessageViewDto>
+
+<h3 class="text-center">Mesajlar Listesi</h3>
+<hr />
+
+@await Html.PartialAsync("_TopMenuPartial")
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center">Mesajlar</h3>
+        @if (Model == null)
+        {
+<p>Gönderilmiş Mesaj bulunmamaktadır...</p> }
+        else
+        {
+<table class="table">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th>Gönderen</th>
+            <th>Başlık</th>
+            <th>Açıklama</th>
+            <th>Tarih</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var message in Model)
+        {
+<tr>
+    <td>@message.UserName</td>
+    <td>@message.Title</td>
+    <td>@message.Description</td>
+    <td>@message.CreateAt</td>
+</tr>
+        }
+    </tbody>
+</table>
+        }
+
+    </div>
+</div>

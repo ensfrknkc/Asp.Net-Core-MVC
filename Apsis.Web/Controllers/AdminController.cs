@@ -1,4 +1,6 @@
-﻿using Apsis.Domain.Models;
+﻿using Apsis.Application.Dto;
+using Apsis.Application.Interfaces;
+using Apsis.Domain.Models;
 using Apsis.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -17,12 +19,14 @@ namespace Apsis.Web.Controllers
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IUserService _userService;
 
-        public AdminController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager)
+        public AdminController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager, IUserService userService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -42,6 +46,25 @@ namespace Apsis.Web.Controllers
             var userRoles = await _userManager.GetRolesAsync(user);
 
             return View(userRoles);
+        }
+        public async Task<IActionResult> Delete(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            await _userManager.DeleteAsync(user);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Update(string userId)
+        {
+            User user = new User();
+            user.Id = userId;
+            return View(user);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(User model)
+        {
+            await _userManager.UpdateAsync(model);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
