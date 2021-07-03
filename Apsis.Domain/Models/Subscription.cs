@@ -10,8 +10,11 @@ namespace Apsis.Domain.Models
     public class Subscription
     {
         public int Id { get; set; }
-        public virtual Flat Flat { get; set; }
+        [ForeignKey("FlatId")]
+        public int FlatId { get; set; }
         public float Amount { get; set; }
+        public int Month { get; set; }
+        public int Year { get; set; }
         public bool Status { get; set; }
 
     }

@@ -1,7 +1,7 @@
-﻿@model BillViewDto
+﻿@model SubscriptionViewDto
 
 
-<h3 class="text-center">Role Yönetimi</h3>
+<h3 class="text-center">Aidat Yönetimi</h3>
 <hr />
 
 @await Html.PartialAsync("_TopMenuPartial")
@@ -9,10 +9,10 @@
 
 <div class="row">
     <div class="col-6">
-        <h3 class="text-center">Fatura Ekle</h3>
-        <form asp-action="AddBill" method="Post">
+        <h3 class="text-center">Aidat Ekle</h3>
+        <form asp-action="SubscriptionAdd" method="Post">
             <div class="form-group">
-                <label>Daire</label>
+                <label>Daire Id</label>
                 <select asp-for="FlatId" asp-items="@ViewBag.Flats" class="form-control">
                     <option selected disabled>--Daire Seçimi--</option>
                 </select>
@@ -20,15 +20,6 @@
             <div class="form-group">
                 <label class="control-label"> Tutar</label>
                 <input asp-for="Amount" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label class="control-label">Fatura Tipi</label>
-                <select asp-for="BillType" class="form-control">
-                    <option selected disabled>--Fatura Seçimi--</option>
-                    <option value="Elektrik">Elektrik</option>
-                    <option value="Su">Su</option>
-                    <option value="Doğalgaz">Doğalgaz</option>
-                </select>
             </div>
             <div class="form-group">
                 <label class="control-label">Ay</label>
@@ -60,38 +51,35 @@
 
 
     <div class="col-6" style="border-left:1px solid black;">
-        <h3 class="text-center">Faturalar</h3>
-        @if (ViewBag.Bills.Count == 0)
+        <h3 class="text-center">Aidatlar</h3>
+        @if (ViewBag.Subscriptions.Count == 0)
         {
-        <p>Henüz eklenmiş Fatura bulunmamaktadır...</p> }
-        else
+<p>Henüz eklenmiş Aidat bulunmamaktadır...</p> }
+else
+{
+<table class="table">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th>Daire Id</th>
+            <th>Tutar</th>
+            <th>Ay</th>
+            <th>Yıl</th>
+            <th>Durum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var subscription in ViewBag.Subscriptions)
         {
-        <table class="table">
-            <thead class="bg-dark text-white">
-                <tr>
-                    <th>Daire Id</th>
-                    <th>Tutar</th>
-                    <th>Fatura Tipi</th>
-                    <th>Ay</th>
-                    <th>Yıl</th>
-                    <th>Durum</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var bill in ViewBag.Bills)
-                {
-                <tr>
-                    <td>@bill.FlatId</td>
-                    <td>@bill.Amount</td>
-                    <td>@bill.BillType</td>
-                    <td>@bill.Month</td>
-                    <td>@bill.Year</td>
-                    <td>@bill.Status</td>
-                </tr>                
+<tr>
+    <td>@subscription.FlatId</td>
+    <td>@subscription.Amount</td>
+    <td>@subscription.Month</td>
+    <td>@subscription.Year</td>
+    <td>@subscription.Status</td>
+</tr>
                 }
-            </tbody>
-        </table>
-        }
+    </tbody>
+</table>}
     </div>
 </div>
 
