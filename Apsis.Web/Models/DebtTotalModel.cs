@@ -1,4 +1,5 @@
 ﻿using Apsis.Application.Dto;
+using Apsis.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Apsis.Web.Models
     {
         public float BillTotal { get; set; }
         public float SubscriptionTotal { get; set; }
-        public List<BillViewDto> Bill { get; set; }
-        public List<SubscriptionViewDto> Subscription { get; set; }
+        public List<Bill> Bill { get; set; }
+        public List<Subscription> Subscription { get; set; }
     }
 }
