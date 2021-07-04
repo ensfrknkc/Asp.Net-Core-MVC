@@ -33,6 +33,11 @@ namespace Apsis.Application.Services
             _unitofWork.Subscription.Delete(_mapper.Map<Subscription>(entity));
         }
 
+        public void DeleteRange(List<SubscriptionViewDto> entityies)
+        {
+            _unitofWork.Subscription.DeleteRange(_mapper.Map<List<Subscription>>(entityies));
+        }
+
         public async Task<List<SubscriptionViewDto>> Get(Expression<Func<SubscriptionViewDto, bool>> filter)
         {
             var dtoFilter = _mapper.Map<Expression<Func<Subscription, bool>>>(filter);

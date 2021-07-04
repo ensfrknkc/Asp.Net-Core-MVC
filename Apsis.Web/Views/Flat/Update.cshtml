@@ -1,0 +1,37 @@
+﻿@model Flat
+
+<h3 class="text-center">Kullanıcı Update</h3>
+<hr />
+
+@await Html.PartialAsync("_TopMenuPartial")
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center">Kullanıcı Ekle</h3>
+        <form asp-action="Update" method="post">
+            <input asp-for="Id" class="form-control" type="hidden" value="@Model.Id" />
+            <div class="form-group">
+                <label>Kullanıcı</label>
+                <select asp-for="UserId" asp-items="@ViewBag.Users" class="form-control">
+                    <option selected disabled>--Kullanıcı Seçimi--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Durum</label>
+                <input asp-for="Status" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Ev Sahibi - Kiracı</label>
+                <select asp-for="OwnerUser" class="form-control">
+                    <option selected disabled>--Ev Sahibi Seçimi--</option>
+                    <option value="EvSahibi">Ev Sahibi</option>
+                    <option value="Kiracı">Kiracı</option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-outline-primary btn-block" value="Güncelle" />
+                <a asp-action="Index" class="btn btn-outline-danger btn-block">Vazgeç</a>
+            </div>
+        </form>
+    </div>
+</div>

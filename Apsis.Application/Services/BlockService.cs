@@ -34,6 +34,11 @@ namespace Apsis.Application.Services
             _unitofWork.Block.Delete(_mapper.Map<Block>(entity));
         }
 
+        public void DeleteRange(List<BlockViewDto> entityies)
+        {
+            _unitofWork.Block.DeleteRange(_mapper.Map<List<Block>>(entityies));
+        }
+
         public async Task<List<BlockViewDto>> Get(Expression<Func<BlockViewDto, bool>> filter)
         {
             var dtoFilter = _mapper.Map<Expression<Func<Block, bool>>>(filter);

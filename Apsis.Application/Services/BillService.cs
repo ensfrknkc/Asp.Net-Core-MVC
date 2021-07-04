@@ -34,6 +34,11 @@ namespace Apsis.Application.Services
             _unitofWork.Bill.Delete(_mapper.Map<Bill>(entity));
         }
 
+        public void DeleteRange(List<BillViewDto> entityies)
+        {
+            _unitofWork.Bill.DeleteRange(_mapper.Map<List<Bill>>(entityies));
+        }
+
         public async Task<List<BillViewDto>> Get(Expression<Func<BillViewDto, bool>> filter)
         {
             var dtoFilter = _mapper.Map<Expression<Func<Bill, bool>>>(filter);

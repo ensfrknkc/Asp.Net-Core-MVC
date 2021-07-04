@@ -35,6 +35,11 @@ namespace Apsis.Application.Services
 
         }
 
+        public void DeleteRange(List<MessageViewDto> entityies)
+        {
+            _unitofWork.Message.DeleteRange(_mapper.Map<List<Message>>(entityies));
+        }
+
         public async Task<List<MessageViewDto>> Get(Expression<Func<MessageViewDto, bool>> filter)
         {
             var dtoFilter = _mapper.Map<Expression<Func<Message, bool>>>(filter);

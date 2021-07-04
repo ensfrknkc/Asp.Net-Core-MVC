@@ -11,6 +11,7 @@ namespace Apsis.Infrastructure.Context
 {
     public class ApsisDbContext: IdentityDbContext<User>
     {
+        
         public ApsisDbContext(DbContextOptions<ApsisDbContext> options) : base(options)
         {
         }

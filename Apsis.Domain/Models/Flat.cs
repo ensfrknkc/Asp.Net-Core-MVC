@@ -11,8 +11,8 @@ namespace Apsis.Domain.Models
     public class Flat
     {
         public int Id { get; set; }
-        public string UserId { get; set; }
         [ForeignKey("UserId")]
+        public string UserId { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<Subscription> Subscription { get; set; }
         public virtual ICollection<Bill>  Bill { get; set; }

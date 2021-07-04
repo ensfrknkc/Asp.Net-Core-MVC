@@ -1,4 +1,4 @@
-﻿@model List<MessageViewDto>
+﻿@model List<Message>
 
 <h3 class="text-center">Mesajlar Listesi</h3>
 <hr />
@@ -25,7 +25,7 @@
         @foreach (var message in Model)
         {
 <tr>
-    <td>@message.UserName</td>
+    <td>@message.User.UserName</td>
     <td>@message.Title</td>
     <td>@message.Description</td>
     <td>@message.CreateAt</td>

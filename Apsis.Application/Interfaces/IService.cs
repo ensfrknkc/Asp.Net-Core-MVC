@@ -11,6 +11,7 @@ namespace Apsis.Application.Interfaces
     {
         Task Add(TEntity entity);
         void Delete(TEntity entity);
+        void DeleteRange(List<TEntity> entityies);
         void Update(TEntity entity);
         Task<List<TEntity>> GetAll();
         Task<List<TEntity>> Get(Expression<Func<TEntity, bool>> filter);

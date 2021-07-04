@@ -17,6 +17,7 @@ namespace Apsis.Infrastructure.Repositories
 
         public Repository(ApsisDbContext context)
         {
+
             _context = context;
             _entitiy = _context.Set<TEntity>();
         }
@@ -30,6 +31,10 @@ namespace Apsis.Infrastructure.Repositories
         {
             _entitiy.Remove(entity);
         }
+        public void DeleteRange(List<TEntity> entityies)
+        {
+            _entitiy.RemoveRange(entityies);
+        }
 
         public async Task<List<TEntity>> Get(Expression<Func<TEntity, bool>> filter)
         {
@@ -41,9 +46,16 @@ namespace Apsis.Infrastructure.Repositories
             return await _entitiy.ToListAsync();
         }
 
+        public async Task<TEntity> GetById(Expression<Func<TEntity, bool>> filter)
+        {
+            var result = await _entitiy.Where(filter).ToListAsync();
+            return result.FirstOrDefault();
+        }
+
         public void Update(TEntity entity)
         {
             _entitiy.Update(entity);
+
         }
     }
 }

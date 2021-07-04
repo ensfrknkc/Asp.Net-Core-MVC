@@ -51,5 +51,10 @@ namespace Apsis.Application.Services
             _unitofWork.Flat.Update(_mapper.Map<Flat>(entity));
             _unitofWork.SaveChangesAsync();
         }
+
+        public void DeleteRange(List<FlatViewDto> entityies)
+        {
+            _unitofWork.Flat.DeleteRange(_mapper.Map<List<Flat>>(entityies));
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Apsis.Application.Dto;
 using Apsis.Application.Interfaces;
 using Apsis.Domain.Models;
+using Apsis.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,24 +17,20 @@ namespace Apsis.Web.Controllers
     {
         private readonly IMessageService _messageService;
         private readonly UserManager<User> _userManager;
+        private readonly IUnitofWork  _uniofWork;
 
-        public MessageController(IMessageService messageService, UserManager<User> userManager)
+        public MessageController(IMessageService messageService, UserManager<User> userManager, IUnitofWork uniofWork)
         {
             _messageService = messageService;
             _userManager = userManager;
+            _uniofWork = uniofWork;
         }
 
         public async Task<IActionResult> Messages()
         {
-            List<MessageViewDto> messageViewDtos = new List<MessageViewDto>();
-            List<MessageViewDto> messages = await _messageService.GetAll();
-            foreach(MessageViewDto message in messages)
-            {
-                User user = await _userManager.FindByIdAsync(message.UserId.ToString());
-                message.UserName = user.UserName;
-                messageViewDtos.Add(message);
-            }
-            return View(messageViewDtos);
+            List<Message> messages = await _uniofWork.Message.GetAll();
+
+            return View(messages);
         }
     }
 }

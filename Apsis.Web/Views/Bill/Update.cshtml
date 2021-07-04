@@ -1,0 +1,64 @@
+﻿@model Bill
+
+<h3 class="text-center">Fatura Güncelleme</h3>
+<hr />
+
+@await Html.PartialAsync("_TopMenuPartial")
+
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center">Fatura Güncelle</h3>
+        <form asp-action="Update" method="post">
+            <input asp-for="Id" class="form-control" type="hidden" value="@Model.Id" />
+            <div class="form-group">
+                <label>Kullanıcı</label>
+                <select asp-for="FlatId" asp-items="@ViewBag.Flats" class="form-control">
+                    <option selected value="@Model.FlatId">@Model.FlatId</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Tutar</label>
+                <input asp-for="Amount" class="form-control" value="@Model.Amount"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Fatura Tipi</label>
+                <select asp-for="BillType" class="form-control">
+                    <option selected value="@Model.BillType">@Model.BillType</option>
+                    <option value="Elektrik">Elektrik</option>
+                    <option value="Su">Su</option>
+                    <option value="Doğalgaz">Doğalgaz</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Ay</label>
+                <select asp-for="Month" class="form-control">
+                    <option selected value='@Model.Month'>@Model.Month</option>
+                    <option value='1'>Ocak</option>
+                    <option value='2'>Şubat</option>
+                    <option value='3'>Mart</option>
+                    <option value='4'>Nisan</option>
+                    <option value='5'>Mayıs</option>
+                    <option value='6'>Haziran</option>
+                    <option value='7'>Temmuz</option>
+                    <option value='8'>Ağustos</option>
+                    <option value='9'>Eylül</option>
+                    <option value='10'>Ekim</option>
+                    <option value='11'>Kasım</option>
+                    <option value='12'>Aralık</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Yıl</label>
+                <input asp-for="Year" class="form-control" value="@Model.Year" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Durum</label>
+                <input asp-for="Status" class="form-control"  value="@Model.Status"/>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-outline-primary btn-block" value="Güncelle" />
+                <a asp-action="Index" class="btn btn-outline-danger btn-block">Vazgeç</a>
+            </div>
+        </form>
+    </div>
+</div>

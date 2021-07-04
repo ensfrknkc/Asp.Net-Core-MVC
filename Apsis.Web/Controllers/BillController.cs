@@ -1,5 +1,7 @@
 ﻿using Apsis.Application.Dto;
 using Apsis.Application.Interfaces;
+using Apsis.Domain.Models;
+using Apsis.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,31 +15,66 @@ namespace Apsis.Web.Controllers
     [Authorize(Roles = "Admin")]
     public class BillController : Controller
     {
-        private readonly IFlatService _flatService;
-        private readonly IBillService _billService;
+        private readonly IUnitofWork _unitofWork;
 
-        public BillController(IFlatService flatService, IBillService billService)
+        public BillController( IUnitofWork unitofWork)
         {
-            _flatService = flatService;
-            _billService = billService;
+            _unitofWork = unitofWork;
         }
 
         public async Task<IActionResult> AddBill()
         {
-            List<FlatViewDto> flats = await _flatService.GetAll();
-            ViewBag.Flats = new SelectList(flats, "Id", "FlatNo");
-            List<BillViewDto> bills = await _billService.GetAll();
-            ViewBag.Bills = new List<BillViewDto>(bills);
+            List<Flat> flats = await _unitofWork.Flat.GetAll();
+            List<Bill> bills = await _unitofWork.Bill.GetAll();
+
+            ViewBag.Flats = new SelectList(flats, "Id", "Id");
+            ViewBag.Bills = new List<Bill>(bills);
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> AddBill(BillViewDto model)
+        public async Task<IActionResult> AddBill(Bill model)
         {
             if (ModelState.IsValid)
             {
-                await _billService.Add(model);
+                await _unitofWork.Bill.Add(model);
+                await _unitofWork.SaveChangesAsync();
                 return RedirectToAction("AddBill");
             }
+            return RedirectToAction("AddBill");
+        }
+
+        public async Task<IActionResult> Delete(string billId)
+        {
+            Bill bill = await _unitofWork.Bill.GetById(x => x.Id == Convert.ToInt32(billId));
+            if (bill != null)
+            {
+                _unitofWork.Bill.Delete(bill);
+                await _unitofWork.SaveChangesAsync();
+            }
+
+            return RedirectToAction("AddBill");
+        }
+
+        public async Task<IActionResult> Update(string billId)
+        {
+            List<Flat> flats = await _unitofWork.Flat.GetAll();
+            ViewBag.Flats = new SelectList(flats, "Id", "Id");
+
+            Bill bill = await _unitofWork.Bill.GetById(x => x.Id == Convert.ToInt32(billId));
+            return View(bill);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(Bill model)
+        {
+            Bill bill = await _unitofWork.Bill.GetById(x => x.Id == model.Id);
+            bill.FlatId = model.FlatId;
+            bill.Amount = model.Amount;
+            bill.BillType = model.BillType;
+            bill.Month = model.Month;
+            bill.Year = model.Year;
+            bill.Status = model.Status;            
+            _unitofWork.Bill.Update(bill);
+            await _unitofWork.SaveChangesAsync();
             return RedirectToAction("AddBill");
         }
     }

@@ -1,7 +1,9 @@
 ﻿using Apsis.Application.Dto;
 using Apsis.Application.Interfaces;
 using Apsis.Domain.Models;
+using Apsis.Infrastructure;
 using Apsis.Web.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,14 +21,12 @@ namespace Apsis.Web.Controllers
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IUserService _userService;
 
-        public AdminController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager, IUserService userService)
+        public AdminController( UserManager<User> userManager, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
-            _userService = userService;
         }
 
         [HttpGet]
@@ -54,16 +54,22 @@ namespace Apsis.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Update(string userId)
+        public async Task<IActionResult> Update(string userId)
         {
-            User user = new User();
-            user.Id = userId;
+            User user = await _userManager.FindByIdAsync(userId);
             return View(user);
         }
         [HttpPost]
         public async Task<IActionResult> Update(User model)
         {
-            await _userManager.UpdateAsync(model);
+            var result = await _userManager.FindByIdAsync(model.Id);
+            result.Name = model.Name;
+            result.Surname = model.Surname;
+            result.IdentificationNumber = model.IdentificationNumber;
+            result.PhoneNumber = model.PhoneNumber;
+            result.UserName = model.UserName;
+            result.Email = model.Email;
+            await _userManager.UpdateAsync(result);
             return RedirectToAction("Index");
         }
 

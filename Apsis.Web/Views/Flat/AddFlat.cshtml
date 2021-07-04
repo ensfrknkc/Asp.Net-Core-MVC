@@ -1,4 +1,4 @@
-﻿@model FlatViewDto
+﻿@model Flat
 
 
 <h3 class="text-center">Daire Yönetimi</h3>
@@ -19,7 +19,6 @@
             </div>
             <div class="form-group">
                 <label>Blok</label>
-                @*@Html.DropDownList("BlockId", new SelectList(ViewBag.BlockList, "Id", "UserName"))*@
                 <select asp-for="BlockId"  asp-items="@ViewBag.BlockList" class="form-control">
                     <option selected disabled>--Blok Seçimi--</option>
                 </select>
@@ -71,6 +70,9 @@
                     <th>Oda Sayısı</th>
                     <th>Kat</th>
                     <th>Kapı Numarası</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -82,6 +84,12 @@
                     <td>@flat.NumberOfRooms</td>
                     <td>@flat.Floor</td>
                     <td>@flat.FlatNo</td>
+                    <td>
+                        <a class="btn btn-success" asp-route-flatId="@flat.Id" asp-action="Delete"> Delete</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-success" asp-route-flatId="@flat.Id" asp-action="Update"> Update</a>
+                    </td>
                 </tr>                
                 }
             </tbody>

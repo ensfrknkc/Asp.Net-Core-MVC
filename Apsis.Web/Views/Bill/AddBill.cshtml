@@ -1,4 +1,4 @@
-﻿@model BillViewDto
+﻿@model Bill
 
 
 <h3 class="text-center">Role Yönetimi</h3>
@@ -52,6 +52,10 @@
                 <input asp-for="Year" class="form-control" />
             </div>
             <div class="form-group">
+                <label class="control-label"> Durum</label>
+                <input asp-for="Status" class="form-control" />
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Ekle" class="btn btn-outline-primary btn-block" />
                 <a asp-action="Index" class="btn btn-outline-danger btn-block">Vazgeç</a>
             </div>
@@ -75,6 +79,8 @@
                     <th>Ay</th>
                     <th>Yıl</th>
                     <th>Durum</th>
+                    <th>Delete</th>
+                    <th>Update</th>
                 </tr>
             </thead>
             <tbody>
@@ -87,6 +93,12 @@
                     <td>@bill.Month</td>
                     <td>@bill.Year</td>
                     <td>@bill.Status</td>
+                    <td>
+                        <a class="btn btn-success" asp-route-billId="@bill.Id" asp-action="Delete"> Delete</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-success" asp-route-billId="@bill.Id" asp-action="Update"> Update</a>
+                    </td>
                 </tr>                
                 }
             </tbody>

@@ -32,6 +32,13 @@ namespace Apsis.Application.Services
         public void Delete(UserViewDto entity)
         {
             _unitofWork.User.Delete(_mapper.Map<User>(entity));
+            _unitofWork.SaveChangesAsync();
+        }
+
+        public void DeleteRange(List<UserViewDto> entityies)
+        {
+            _unitofWork.User.DeleteRange(_mapper.Map<List<User>>(entityies));
+            _unitofWork.SaveChangesAsync();
         }
 
         public async Task<List<UserViewDto>> Get(Expression<Func<UserViewDto, bool>> filter)

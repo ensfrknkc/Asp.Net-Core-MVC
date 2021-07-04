@@ -12,6 +12,8 @@ namespace Apsis.Web.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "Soyad bilgisi girilmelidir!")]
         public string Surname { get; set; }
+        [MaxLength(11)]
+        [MinLength(11)]
         public string IdentificationNumber { get; set; }
         public string PhoneNumber { get; set; }
         public string UserName { get; set; }
