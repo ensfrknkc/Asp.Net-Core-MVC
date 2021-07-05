@@ -1,8 +1,66 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model UserInvoice
+<h3 class="text-center">Daire Borçları</h3>
+<hr />
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <div class="col-6">
+        <h3 class="text-center">Faturalar</h3>
+        @if (Model.Bills == null)
+        {
+<p>Ödenmemiş Fatura bulunmamaktadır...</p> }
+else
+{
+<table class="table">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th>Daire Id</th>
+            <th>Tutar</th>
+            <th>Ay</th>
+            <th>Yıl</th>
+            <th>Durum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bill in Model.Bills)
+        {
+<tr>
+    <td>@bill.FlatId</td>
+    <td>@bill.Amount</td>
+    <td>@bill.Month</td>
+    <td>@bill.Year</td>
+    <td>@bill.Status</td>
+</tr>                }
+    </tbody>
+</table>}
+    </div>
+    <div class="col-6">
+        <h3 class="text-center">Aidatlar</h3>
+        @if (Model.Subscriptions == null)
+        {
+<p>Ödenmemiş Aidat bulunmamaktadır...</p> }
+else
+{
+<table class="table">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th>Daire Id</th>
+            <th>Tutar</th>
+            <th>Ay</th>
+            <th>Yıl</th>
+            <th>Durum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var subscription in Model.Subscriptions)
+        {
+<tr>
+    <td>@subscription.FlatId</td>
+    <td>@subscription.Amount</td>
+    <td>@subscription.Month</td>
+    <td>@subscription.Year</td>
+    <td>@subscription.Status</td>
+</tr>                }
+    </tbody>
+</table>}
+    </div>
 </div>

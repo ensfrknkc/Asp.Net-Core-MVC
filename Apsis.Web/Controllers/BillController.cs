@@ -71,8 +71,7 @@ namespace Apsis.Web.Controllers
             bill.Amount = model.Amount;
             bill.BillType = model.BillType;
             bill.Month = model.Month;
-            bill.Year = model.Year;
-            bill.Status = model.Status;            
+            bill.Year = model.Year;           
             _unitofWork.Bill.Update(bill);
             await _unitofWork.SaveChangesAsync();
             return RedirectToAction("AddBill");

@@ -74,7 +74,6 @@ namespace Apsis.Web.Controllers
             subscription.Amount = model.Amount;
             subscription.Month = model.Month;
             subscription.Year = model.Year;
-            subscription.Status = model.Status;
             _unitofWork.Subscription.Update(subscription);
             await _unitofWork.SaveChangesAsync();
             return RedirectToAction("SubscriptionAdd");

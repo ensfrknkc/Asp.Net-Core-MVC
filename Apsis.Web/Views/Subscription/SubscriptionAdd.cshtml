@@ -43,10 +43,6 @@
                 <input asp-for="Year" class="form-control" />
             </div>
             <div class="form-group">
-                <label class="control-label"> Durum</label>
-                <input asp-for="Status" class="form-control" />
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Ekle" class="btn btn-outline-primary btn-block" />
                 <a asp-action="Index" class="btn btn-outline-danger btn-block">Vazgeç</a>
             </div>
@@ -68,7 +64,6 @@ else
             <th>Tutar</th>
             <th>Ay</th>
             <th>Yıl</th>
-            <th>Durum</th>
             <th>Delete</th>
             <th>Update</th>
         </tr>
@@ -81,7 +76,6 @@ else
             <td>@subscription.Amount</td>
             <td>@subscription.Month</td>
             <td>@subscription.Year</td>
-            <td>@subscription.Status</td>
             <td>
                 <a class="btn btn-success" asp-route-subscriptionId="@subscription.Id" asp-action="Delete"> Delete</a>
             </td>

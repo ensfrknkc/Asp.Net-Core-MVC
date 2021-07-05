@@ -26,7 +26,7 @@ namespace Apsis.Web.Controllers
 
         public async Task<IActionResult> DebtList()
         {
-            List<Bill> bills = await _unitofWork.Bill.Get(x => x.Status == true);
+            List<Bill> bills = await _unitofWork.Bill.Get(x => x.Status == false);
             List<Subscription> subscription = await _unitofWork.Subscription.Get(x => x.Status == true);
             DebtTotalModel model = new DebtTotalModel();
             model.Bill = bills;
@@ -37,7 +37,7 @@ namespace Apsis.Web.Controllers
         }
         public async Task<IActionResult> PaidDebtList()
         {
-            List<Bill> bills = await _unitofWork.Bill.Get(x => x.Status == false);
+            List<Bill> bills = await _unitofWork.Bill.Get(x => x.Status == true);
             List<Subscription> subscription = await _unitofWork.Subscription.Get(x => x.Status == false);
             ViewBag.Bills = new List<Bill>(bills);
             ViewBag.Subscription = new List<Subscription>(subscription);
