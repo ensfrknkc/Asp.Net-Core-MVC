@@ -9,9 +9,10 @@ namespace Apsis.Domain.Models
 {
     public class Bill
     {
-        public int Id { get; set; }
-        [ForeignKey("FlatId")]
+        public int Id { get; set; }   
         public int FlatId { get; set; }
+        [ForeignKey("FlatId")]
+        public virtual Flat Flat { get; set; }
         public float Amount { get; set; }
         public string BillType { get; set; }
         public int Month { get; set; }

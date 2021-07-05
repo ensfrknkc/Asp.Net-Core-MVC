@@ -12,7 +12,7 @@
         <h3 class="text-center">Fatura Ekle</h3>
         <form asp-action="AddBill" method="Post">
             <div class="form-group">
-                <label>Daire</label>
+                <label>Daire Kullanıcısı</label>
                 <select asp-for="FlatId" asp-items="@ViewBag.Flats" class="form-control">
                     <option selected disabled>--Daire Seçimi--</option>
                 </select>
@@ -63,13 +63,13 @@
         <h3 class="text-center">Faturalar</h3>
         @if (ViewBag.Bills.Count == 0)
         {
-        <p>Henüz eklenmiş Fatura bulunmamaktadır...</p> }
+        <p class="text-center">Henüz eklenmiş Fatura bulunmamaktadır...</p> }
         else
         {
         <table class="table">
             <thead class="bg-dark text-white">
-                <tr>
-                    <th>Daire Id</th>
+                <tr class="text-center">
+                    <th>Daire Kullanıcısı</th>
                     <th>Tutar</th>
                     <th>Fatura Tipi</th>
                     <th>Ay</th>
@@ -81,8 +81,8 @@
             <tbody>
                 @foreach (var bill in ViewBag.Bills)
                 {
-                <tr>
-                    <td>@bill.FlatId</td>
+                <tr class="text-center">
+                    <td>@bill.Flat.User.Name</td>
                     <td>@bill.Amount</td>
                     <td>@bill.BillType</td>
                     <td>@bill.Month</td>

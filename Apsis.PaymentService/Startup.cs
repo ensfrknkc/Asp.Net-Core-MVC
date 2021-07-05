@@ -48,7 +48,7 @@ namespace Apsis.PaymentService
             });
 
             services.Configure<MongoDbConfiguration>(Configuration.GetSection("Mongo"));
-            services.AddScoped<CreditCardService>();
+            services.AddScoped<Services.CreditCardService>();
 
             services.AddSwaggerGen(c =>
             {

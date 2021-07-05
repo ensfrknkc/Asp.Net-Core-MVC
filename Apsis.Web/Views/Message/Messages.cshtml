@@ -9,12 +9,12 @@
         <h3 class="text-center">Mesajlar</h3>
         @if (Model == null)
         {
-<p>Gönderilmiş Mesaj bulunmamaktadır...</p> }
+<p class="text-center">Gönderilmiş Mesaj bulunmamaktadır...</p> }
         else
         {
 <table class="table">
     <thead class="bg-dark text-white">
-        <tr>
+        <tr class="text-center">
             <th>Gönderen</th>
             <th>Başlık</th>
             <th>Açıklama</th>
@@ -24,8 +24,8 @@
     <tbody>
         @foreach (var message in Model)
         {
-<tr>
-    <td>@message.User.UserName</td>
+<tr class="text-center">
+    <td>@message.User.Name</td>
     <td>@message.Title</td>
     <td>@message.Description</td>
     <td>@message.CreateAt</td>

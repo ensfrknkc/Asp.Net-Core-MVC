@@ -52,7 +52,7 @@ namespace Apsis.Web.Controllers
         public async Task<IActionResult> AddFlat()
         {
             var users = _userManager.Users.ToList();
-            ViewBag.Users = new SelectList(users, "Id", "UserName");
+            ViewBag.Users = new SelectList(users, "Id", "Name");
             List<Flat> flats = await _unitofWork.Flat.GetAll();
             List<Block> block = await _unitofWork.Block.GetAll();
             ViewBag.Flats = new List<Flat>(flats);
@@ -70,6 +70,17 @@ namespace Apsis.Web.Controllers
                 return RedirectToAction("AddFlat");
             }
             return RedirectToAction("AddFlat");
+        }
+        public async Task<IActionResult> BlockDelete(string blockId)
+        {
+            Block block = await _unitofWork.Block.GetById(x => x.Id == Convert.ToInt32(blockId));
+            if (block != null)
+            {
+                _unitofWork.Block.Delete(block);
+                await _unitofWork.SaveChangesAsync();
+            }
+
+            return RedirectToAction("AddBlock");
         }
 
         public async Task<IActionResult> Delete(string flatId)
@@ -108,7 +119,6 @@ namespace Apsis.Web.Controllers
             List<Flat> flatList = await _unitofWork.Flat.Get(x => x.Id == model.Id);
             Flat flat = flatList.FirstOrDefault();
             flat.UserId = model.UserId;
-            flat.Status = model.Status;
             flat.OwnerUser = model.OwnerUser;
              _unitofWork.Flat.Update(flat);
             await _unitofWork.SaveChangesAsync();

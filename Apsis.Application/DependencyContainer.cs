@@ -49,7 +49,10 @@ namespace Apsis.Application
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
 
-
+            services.AddHttpClient<ICreditCardService, CreditCardService>(options =>
+            {
+                options.BaseAddress = new Uri(configuration["CreditCard:Url"]);
+            });
 
             var mappingConfig = new MapperConfiguration(cfg => 
             {

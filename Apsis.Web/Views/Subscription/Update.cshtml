@@ -11,7 +11,7 @@
         <form asp-action="Update" method="post">
             <input asp-for="Id" class="form-control" type="hidden" value="@Model.Id" />
             <div class="form-group">
-                <label>Kullanıcı</label>
+                <label>Daire Kullanıcı</label>
                 <select asp-for="FlatId" asp-items="@ViewBag.Flats" class="form-control">
                     <option selected value="@Model.FlatId">@Model.FlatId</option>
                 </select>

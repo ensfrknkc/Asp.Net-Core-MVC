@@ -26,6 +26,7 @@ namespace Apsis.Web.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(string userName, string password)
         {

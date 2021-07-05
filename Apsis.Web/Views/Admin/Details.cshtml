@@ -12,10 +12,10 @@
         <div class="col-12">
             @if (Model.Count == 0)
             {
-<p>No roles found!</p> }
+<p class="text-center">Atanmış rol bulunmamaktadır.</p> }
 else
 {
-<h3 class="text-center">Roles</h3>
+<h3 class="text-center">Rol</h3>
 
                 <table class="table">
                     <thead class="bg-dark text-white">
@@ -34,7 +34,7 @@ else
                    asp-route-role="@r"
                    asp-route-userName="@ViewBag.UserName"
                    asp-action="RemoveUserRole"
-                   onclick="return confirm('Are you sure to remove this role from user?')">Remove Role</a>
+                   onclick="return confirm('Rolü kaldırmaya eminmisiniz?')">Rolü Kaldır</a>
             </td>
         </tr>
 }

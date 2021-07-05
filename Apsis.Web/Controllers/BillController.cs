@@ -27,7 +27,7 @@ namespace Apsis.Web.Controllers
             List<Flat> flats = await _unitofWork.Flat.GetAll();
             List<Bill> bills = await _unitofWork.Bill.GetAll();
 
-            ViewBag.Flats = new SelectList(flats, "Id", "Id");
+            ViewBag.Flats = new SelectList(flats, "Id", "User.Name");
             ViewBag.Bills = new List<Bill>(bills);
             return View();
         }
@@ -58,7 +58,7 @@ namespace Apsis.Web.Controllers
         public async Task<IActionResult> Update(string billId)
         {
             List<Flat> flats = await _unitofWork.Flat.GetAll();
-            ViewBag.Flats = new SelectList(flats, "Id", "Id");
+            ViewBag.Flats = new SelectList(flats, "Id", "User.Name");
 
             Bill bill = await _unitofWork.Bill.GetById(x => x.Id == Convert.ToInt32(billId));
             return View(bill);

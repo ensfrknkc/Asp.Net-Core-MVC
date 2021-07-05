@@ -56,12 +56,12 @@
         <h3 class="text-center">Kullanıcılar</h3>
         @if (ViewBag.AllUsers.Count == 0)
         {
-        <p>Kullanıcı bulunamadı...</p> }
+        <p class="text-center">Kullanıcı bulunamadı...</p> }
         else
         {
         <table class="table">
             <thead class="bg-dark text-white">
-                <tr>
+                <tr class="text-center">
                     <th>Ad</th>
                     <th>Soyad</th>
                     <th>E-Mail</th>
@@ -70,7 +70,7 @@
             <tbody>
                 @foreach (var User in ViewBag.AllUsers)
                 {
-                    <tr>
+                    <tr class="text-center">
                         <td>@User.Name</td>
                         <td>@User.Surname</td>
                         <td>@User.Email</td>       

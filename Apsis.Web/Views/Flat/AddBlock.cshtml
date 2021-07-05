@@ -26,21 +26,25 @@
         <h3 class="text-center">Bloklar</h3>
         @if (ViewBag.Blocks.Count == 0)
         {
-        <p>Henüz eklenmiş blok bulunmamaktadır...</p>
+        <p class="text-center">Henüz eklenmiş blok bulunmamaktadır...</p>
         }
         else
         {
         <table class="table">
             <thead class="bg-dark text-white">
-                <tr>
+                <tr class="text-center">
                     <th>Blok Adı</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var block in ViewBag.Blocks)
                 {
-                <tr>
+                <tr class="text-center">
                     <td>@block.Name</td>
+                    <td>
+                        <a class="btn btn-success" asp-route-blockId="@block.Id" asp-action="BlockDelete"> Delete</a>
+                    </td>
                 </tr>
                 }
             </tbody>

@@ -33,6 +33,8 @@ namespace Apsis.Web
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.RegisterApsis(Configuration);
             services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = $"/Auth/Login";
@@ -61,7 +63,7 @@ namespace Apsis.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -8,13 +8,13 @@
         <h3 class="text-center">Faturalar</h3>
         @if(Model.Bill == null)
         {
-<p>Ödenmemiş Fatura bulunmamaktadır...</p> }
+<p class="text-center">Ödenmemiş Fatura bulunmamaktadır...</p> }
 else
 {
 <table class="table">
     <thead class="bg-dark text-white">
-        <tr>
-            <th>Daire Id</th>
+        <tr class="text-center">
+            <th>Daire Kullanıcısı</th>
             <th>Tutar</th>
             <th>Ay</th>
             <th>Yıl</th>
@@ -24,8 +24,8 @@ else
     <tbody>
         @foreach (var subscription in Model.Bill)
         {
-<tr>
-    <td>@subscription.FlatId</td>
+<tr class="text-center">
+    <td>@subscription.Flat.User.Name</td>
     <td>@subscription.Amount</td>
     <td>@subscription.Month</td>
     <td>@subscription.Year</td>
@@ -46,13 +46,13 @@ else
         <h3 class="text-center">Aidatlar</h3>
         @if (Model.Subscription == null)
         {
-    <p>Ödenmemiş Aidat bulunmamaktadır...</p> }
+    <p class="text-center">Ödenmemiş Aidat bulunmamaktadır...</p> }
 else
 {
     <table class="table">
         <thead class="bg-dark text-white">
-            <tr>
-                <th>Daire Id</th>
+            <tr class="text-center">
+                <th>Daire Kullanıcısı</th>
                 <th>Tutar</th>
                 <th>Ay</th>
                 <th>Yıl</th>
@@ -62,8 +62,8 @@ else
         <tbody>
             @foreach (var subscription in Model.Subscription)
             {
-    <tr>
-        <td>@subscription.FlatId</td>
+    <tr class="text-center">
+        <td>@subscription.Flat.User.Name</td>
         <td>@subscription.Amount</td>
         <td>@subscription.Month</td>
         <td>@subscription.Year</td>

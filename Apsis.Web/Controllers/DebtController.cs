@@ -3,6 +3,7 @@ using Apsis.Application.Interfaces;
 using Apsis.Domain.Models;
 using Apsis.Infrastructure;
 using Apsis.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Apsis.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class DebtController : Controller
     {
         private readonly IBillService _billService;
@@ -27,7 +29,7 @@ namespace Apsis.Web.Controllers
         public async Task<IActionResult> DebtList()
         {
             List<Bill> bills = await _unitofWork.Bill.Get(x => x.Status == false);
-            List<Subscription> subscription = await _unitofWork.Subscription.Get(x => x.Status == true);
+            List<Subscription> subscription = await _unitofWork.Subscription.Get(x => x.Status == false);
             DebtTotalModel model = new DebtTotalModel();
             model.Bill = bills;
             model.Subscription = subscription;
@@ -38,10 +40,11 @@ namespace Apsis.Web.Controllers
         public async Task<IActionResult> PaidDebtList()
         {
             List<Bill> bills = await _unitofWork.Bill.Get(x => x.Status == true);
-            List<Subscription> subscription = await _unitofWork.Subscription.Get(x => x.Status == false);
-            ViewBag.Bills = new List<Bill>(bills);
-            ViewBag.Subscription = new List<Subscription>(subscription);
+            List<Subscription> subscription = await _unitofWork.Subscription.Get(x => x.Status == true);
             DebtTotalModel model = new DebtTotalModel();
+            model.Bill = new List<Bill>(bills);
+            model.Subscription = new List<Subscription>(subscription);
+            
             model.BillTotal = bills.Sum(item => item.Amount);
             model.SubscriptionTotal = subscription.Sum(item => item.Amount);
             return View(model);

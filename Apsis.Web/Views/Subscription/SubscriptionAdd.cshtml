@@ -12,7 +12,7 @@
         <h3 class="text-center">Aidat Ekle</h3>
         <form asp-action="SubscriptionAdd" method="Post">
             <div class="form-group">
-                <label>Daire Id</label>
+                <label>Daire Kullanıcısı</label>
                 <select asp-for="FlatId" asp-items="@ViewBag.Flats" class="form-control">
                     <option selected disabled>--Daire Seçimi--</option>
                 </select>
@@ -54,13 +54,13 @@
         <h3 class="text-center">Aidatlar</h3>
         @if (ViewBag.Subscriptions.Count == 0)
         {
-<p>Henüz eklenmiş Aidat bulunmamaktadır...</p> }
+<p class="text-center">Henüz eklenmiş Aidat bulunmamaktadır...</p> }
 else
 {
 <table class="table">
     <thead class="bg-dark text-white">
-        <tr>
-            <th>Daire Id</th>
+        <tr class="text-center">
+            <th>Daire Kullanıcısı</th>
             <th>Tutar</th>
             <th>Ay</th>
             <th>Yıl</th>
@@ -71,8 +71,8 @@ else
     <tbody>
         @foreach (var subscription in ViewBag.Subscriptions)
         {
-        <tr>
-            <td>@subscription.FlatId</td>
+        <tr class="text-center">
+            <td>@subscription.Flat.User.Name</td>
             <td>@subscription.Amount</td>
             <td>@subscription.Month</td>
             <td>@subscription.Year</td>
