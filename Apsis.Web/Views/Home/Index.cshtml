@@ -16,6 +16,7 @@ else
             <th>Tutar</th>
             <th>Ay</th>
             <th>Yıl</th>
+            <th>Kurum</th>
             <th>Ödeme</th>
         </tr>
     </thead>
@@ -26,6 +27,7 @@ else
             <td>@bill.Amount</td>
             <td>@bill.Month</td>
             <td>@bill.Year</td>
+            <td>@bill.BillType</td>
             <td>
                 <a class="btn btn-primary" asp-route-billId="@bill.Id" asp-action="BillPayment"> Fatura Öde</a>
             </td>
