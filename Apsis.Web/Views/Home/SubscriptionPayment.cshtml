@@ -1,0 +1,36 @@
+﻿@model CreditCardDto
+
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <h3 class="text-center">Ödeme İşlemi</h3>
+        <form asp-action="SubscriptionPayment" method="post">
+            <div class="form-group">
+                <label class="control-label"> Kart Sahibi</label>
+                <input asp-for="Owner" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Kart Numarası</label>
+                <input asp-for="CardNumber" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Ay</label>
+                <input asp-for="ValidMonth" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Yıl</label>
+                <input asp-for="ValidYear" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> CVV</label>
+                <input asp-for="Cvv" class="form-control" />
+            </div>
+            <input asp-for="Id" class="form-control" value="@Model.Id" type="hidden" />
+            <input asp-for="Money" class="form-control" value="@Model.Money" type="hidden" />
+            <div>
+                <input type="submit" class="btn btn-outline-primary btn-block" value="Ödeme Yap" />
+                <a asp-action="Index" class="btn btn-outline-danger btn-block">Vazgeç</a>
+            </div>
+        </form>
+    </div>
+</div>

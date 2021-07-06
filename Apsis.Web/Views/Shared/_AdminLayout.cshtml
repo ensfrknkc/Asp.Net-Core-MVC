@@ -34,10 +34,15 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Apsis Admin</div>
             </a>
-
-
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" asp-action="Index" asp-controller="Home">
+                    <i class="fas fa-eye"></i>
+                    <span>Site Görünümü</span>
+                </a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -48,14 +53,14 @@
             </div>
             <li class="nav-item">
                 <a class="nav-link" asp-action="Index" asp-controller="Admin">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-user-edit"></i>
                     <span>Kullanıcı Güncelle</span>
                 </a>
             </li>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" asp-action="AddUser" asp-controller="Auth">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-user-plus"></i>
                     <span>Kullanıcı Ekle</span>
                 </a>
             </li>
@@ -63,56 +68,56 @@
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" asp-action="AddBlock" asp-controller="Flat">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-plus-circle"></i>
                     <span>Blok Ekle</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" asp-action="AddFlat" asp-controller="Flat">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-building"></i>
                     <span>Daire Ekle</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" asp-action="AddBill" asp-controller="Bill">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-plus-square"></i>
                     <span>Fatura Ekle</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" asp-action="SubscriptionAdd" asp-controller="Subscription">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-plus-square"></i>
                     <span>Aidat Ekle</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" asp-action="DebtList" asp-controller="Debt">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-wallet"></i>
                     <span>Alacak Listesi</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" asp-action="PaidDebtList" asp-controller="Debt">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-money-check-alt"></i>
                     <span>Ödenmişler Listesi</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" asp-action="Messages" asp-controller="Message">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-envelope-square"></i>
                     <span>Mesajlar</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" asp-action="DisplayRoles" asp-controller="Admin">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-tags"></i>
                     <span>Rol Ekle</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" asp-action="AddUserToRole" asp-controller="Admin">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-user-tag"></i>
                     <span>Üye Rol Ata</span>
                 </a>
             </li>
@@ -152,7 +157,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Enes Furkan KOÇ</span>
+                        <span>Copyright &copy; by Enes Furkan KOÇ</span>
                     </div>
                 </div>
             </footer>
