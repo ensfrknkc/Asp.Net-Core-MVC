@@ -1,13 +1,14 @@
-﻿@model User
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model User
 
-<h3 class="text-center">Kullanıcı Update</h3>
-<hr />
+<h3 class="text-center">Üye Güncelle</h3>
+<hr /> <br />
 
-@await Html.PartialAsync("_TopMenuPartial")
 
 <div class="row">
     <div class="col-12">
-        <h3 class="text-center">Kullanıcı Ekle</h3>
         <form asp-action="Update" method="post">
             <input asp-for="Id" class="form-control" type="hidden" value="@Model.Id" />
             <div class="form-group">

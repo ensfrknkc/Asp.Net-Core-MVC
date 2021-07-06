@@ -1,10 +1,13 @@
-﻿@model Block
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model Block
 
 
-<h3 class="text-center">Role Yönetimi</h3>
+<h3 class="text-center">Blok Yönetimi</h3>
 <hr />
 
-@await Html.PartialAsync("_TopMenuPartial")
+<br />
 
 
 <div class="row">
@@ -16,7 +19,7 @@
                 <input asp-for="Name" class="form-control" placeholder="Blok ismi giriniz..." />
                 <br />
                 <input type="submit" value="Ekle" class="btn btn-outline-primary btn-block" />
-                <a asp-action="Index" class="btn btn-outline-danger btn-block">Cancel</a>
+                <a asp-action="Index" asp-controller="Admin" class="btn btn-outline-danger btn-block">Vazgeç</a>
             </div>
         </form>
     </div>
@@ -26,30 +29,27 @@
         <h3 class="text-center">Bloklar</h3>
         @if (ViewBag.Blocks.Count == 0)
         {
-        <p class="text-center">Henüz eklenmiş blok bulunmamaktadır...</p>
-        }
-        else
+<p class="text-center">Henüz eklenmiş blok bulunmamaktadır...</p> }
+            else
+            {
+<table class="table">
+    <thead class="bg-dark text-white">
+        <tr class="text-center">
+            <th>Blok Adı</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var block in ViewBag.Blocks)
         {
-        <table class="table">
-            <thead class="bg-dark text-white">
-                <tr class="text-center">
-                    <th>Blok Adı</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var block in ViewBag.Blocks)
-                {
-                <tr class="text-center">
-                    <td>@block.Name</td>
-                    <td>
-                        <a class="btn btn-success" asp-route-blockId="@block.Id" asp-action="BlockDelete"> Delete</a>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
-        }
+<tr class="text-center">
+    <td>@block.Name</td>
+    <td>
+        <a class="btn btn-success" asp-route-blockId="@block.Id" asp-action="BlockDelete"> Delete</a>
+    </td>
+</tr>                }
+    </tbody>
+</table>}
     </div>
 </div>
 

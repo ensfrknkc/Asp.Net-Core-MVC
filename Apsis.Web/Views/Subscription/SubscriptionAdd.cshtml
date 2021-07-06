@@ -1,10 +1,12 @@
-﻿@model Subscription
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model Subscription
 
 
 <h3 class="text-center">Aidat Yönetimi</h3>
-<hr />
+<hr /><br />
 
-@await Html.PartialAsync("_TopMenuPartial")
 
 
 <div class="row">
@@ -71,19 +73,18 @@ else
     <tbody>
         @foreach (var subscription in ViewBag.Subscriptions)
         {
-        <tr class="text-center">
-            <td>@subscription.Flat.User.Name</td>
-            <td>@subscription.Amount</td>
-            <td>@subscription.Month</td>
-            <td>@subscription.Year</td>
-            <td>
-                <a class="btn btn-success" asp-route-subscriptionId="@subscription.Id" asp-action="Delete"> Delete</a>
-            </td>
-            <td>
-                <a class="btn btn-success" asp-route-subscriptionId="@subscription.Id" asp-action="Update"> Update</a>
-            </td>
-        </tr>
-                }
+<tr class="text-center">
+    <td>@subscription.Flat.User.Name</td>
+    <td>@subscription.Amount</td>
+    <td>@subscription.Month</td>
+    <td>@subscription.Year</td>
+    <td>
+        <a class="btn btn-success" asp-route-subscriptionId="@subscription.Id" asp-action="Delete"> Delete</a>
+    </td>
+    <td>
+        <a class="btn btn-success" asp-route-subscriptionId="@subscription.Id" asp-action="Update"> Update</a>
+    </td>
+</tr>                }
     </tbody>
 </table>}
     </div>

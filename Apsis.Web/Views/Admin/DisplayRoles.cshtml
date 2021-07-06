@@ -1,11 +1,14 @@
-﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model List<Microsoft.AspNetCore.Identity.IdentityRole>
 
 @{ ViewData["Title"] = "All Roles"; }
 
-<h3 class="text-center">Role Yönetimi</h3>
-<hr />
+<h3 class="text-center">Rol Yönetimi</h3>
+<hr /> <br />
 
-@await Html.PartialAsync("_TopMenuPartial")
+
 
 
 <div class="row">
@@ -14,10 +17,10 @@
         <form asp-action="AddRole" method="Post">
             <div class="form-group">
                 <label>Rol Adı</label>
-                <input type="text" id="role" name="role" class="form-control" placeholder="Enter role name.." />
+                <input type="text" id="role" name="role" class="form-control" placeholder="Rol adı giriniz..." />
                 <br />
-                <input type="submit" value="Create" class="btn btn-outline-primary btn-block" />
-                <a asp-action="Index" class="btn btn-outline-danger btn-block">Cancel</a>
+                <input type="submit" value="Ekle" class="btn btn-outline-primary btn-block" />
+                <a asp-action="Index" class="btn btn-outline-danger btn-block">Vazgeç</a>
             </div>
         </form>
     </div>
@@ -27,31 +30,30 @@
         <h3 class="text-center">Roller</h3>
         @if (Model.Count == 0)
         {
-            <p class="text-center">Role bulunamadı!</p> }
-        else
+<p class="text-center">Role bulunamadı!</p> }
+else
+{
+<table class="table">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th>Rol Adı</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
         {
-            <table class="table">
-                 <thead class="bg-dark text-white">
-                    <tr>
-                        <th>Role Name</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var r in Model)
-                    {
-                        <tr>
-                            <td>@r.Name</td>
-                            <td>
-                                <a class="btn btn-outline-danger"
-                                   asp-route-role="@r.Name"
-                                   asp-action="RemoveRole"
-                                   onclick="return confirm('Are you sure to remove this role')">Remove Role</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>}
+<tr>
+    <td>@r.Name</td>
+    <td>
+        <a class="btn btn-outline-danger"
+           asp-route-role="@r.Name"
+           asp-action="RemoveRole"
+           onclick="return confirm('Rolü kaldırmak istediğinize eminmisiniz?')">Rolü Kaldır</a>
+    </td>
+</tr>}
+    </tbody>
+</table>}
     </div>
 </div>
 

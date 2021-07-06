@@ -1,10 +1,12 @@
-﻿@model UserViewModel
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model UserViewModel
 
 
 <h3 class="text-center">Kullanıcı Yönetimi</h3>
-<hr />
+<hr /> <br />
 
-@await Html.PartialAsync("_TopMenuPartial")
 
 <div class="row">
     <div class="col-6">
@@ -50,56 +52,55 @@
                 <a asp-action="Index" class="btn btn-outline-danger btn-block">Vazgeç</a>
             </div>
         </form>
-        
+
     </div>
     <div class="col-6" style="border-left:1px solid black;">
         <h3 class="text-center">Kullanıcılar</h3>
         @if (ViewBag.AllUsers.Count == 0)
         {
-        <p class="text-center">Kullanıcı bulunamadı...</p> }
-        else
+<p class="text-center">Kullanıcı bulunamadı...</p> }
+else
+{
+<table class="table">
+    <thead class="bg-dark text-white">
+        <tr class="text-center">
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>E-Mail</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var User in ViewBag.AllUsers)
         {
-        <table class="table">
-            <thead class="bg-dark text-white">
-                <tr class="text-center">
-                    <th>Ad</th>
-                    <th>Soyad</th>
-                    <th>E-Mail</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var User in ViewBag.AllUsers)
-                {
-                    <tr class="text-center">
-                        <td>@User.Name</td>
-                        <td>@User.Surname</td>
-                        <td>@User.Email</td>       
-                    </tr>
-                 }
-            </tbody>
-        </table>}
+<tr class="text-center">
+    <td>@User.Name</td>
+    <td>@User.Surname</td>
+    <td>@User.Email</td>
+</tr>}
+    </tbody>
+</table>}
     </div>
 </div>
 <script>
     function password_generator() {
-    var length = (8)?(8):(10);
-    var string = "abcdefghijklmnopqrstuvwxyz"; //to upper
-    var numeric = '0123456789';
-    var punctuation = '!@@#$%^&*()_+~`|}{[]\:;?><,./-=';
-    var password = "";
-    var character = "";
-    var crunch = true;
-    while( password.length<length ) {
-        entity1 = Math.ceil(string.length * Math.random()*Math.random());
-        entity2 = Math.ceil(numeric.length * Math.random()*Math.random());
-        entity3 = Math.ceil(punctuation.length * Math.random()*Math.random());
-        hold = string.charAt( entity1 );
-        hold = (password.length%2==0)?(hold.toUpperCase()):(hold);
-        character += hold;
-        character += numeric.charAt( entity2 );
-        character += punctuation.charAt( entity3 );
-        password = character;
-    }
+        var length = (8) ? (8) : (10);
+        var string = "abcdefghijklmnopqrstuvwxyz"; //to upper
+        var numeric = '0123456789';
+        var punctuation = '!@@#$%^&*()_+~`|}{[]\:;?><,./-=';
+        var password = "";
+        var character = "";
+        var crunch = true;
+        while (password.length < length) {
+            entity1 = Math.ceil(string.length * Math.random() * Math.random());
+            entity2 = Math.ceil(numeric.length * Math.random() * Math.random());
+            entity3 = Math.ceil(punctuation.length * Math.random() * Math.random());
+            hold = string.charAt(entity1);
+            hold = (password.length % 2 == 0) ? (hold.toUpperCase()) : (hold);
+            character += hold;
+            character += numeric.charAt(entity2);
+            character += punctuation.charAt(entity3);
+            password = character;
+        }
         password = password.split('').sort(function () { return 0.5 - Math.random() }).join('');
         document.getElementById("Password").setAttribute('value', password);
 

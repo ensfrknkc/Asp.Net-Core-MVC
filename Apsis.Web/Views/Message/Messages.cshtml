@@ -1,38 +1,40 @@
-﻿@model List<Message>
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model List<Message>
 
-<h3 class="text-center">Mesajlar Listesi</h3>
+<h3 class="text-center">Mesajlar</h3>
 <hr />
-
-@await Html.PartialAsync("_TopMenuPartial")
+<br />
 <div class="row">
     <div class="col-12">
-        <h3 class="text-center">Mesajlar</h3>
+
         @if (Model == null)
         {
-<p class="text-center">Gönderilmiş Mesaj bulunmamaktadır...</p> }
+            <p class="text-center">Gönderilmiş Mesaj bulunmamaktadır...</p> }
         else
         {
-<table class="table">
-    <thead class="bg-dark text-white">
-        <tr class="text-center">
-            <th>Gönderen</th>
-            <th>Başlık</th>
-            <th>Açıklama</th>
-            <th>Tarih</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var message in Model)
-        {
-<tr class="text-center">
-    <td>@message.User.Name</td>
-    <td>@message.Title</td>
-    <td>@message.Description</td>
-    <td>@message.CreateAt</td>
-</tr>
-        }
-    </tbody>
-</table>
+            <table class="table">
+                <thead class="bg-dark text-white">
+                    <tr class="text-center">
+                        <th>Gönderen</th>
+                        <th>Başlık</th>
+                        <th>Açıklama</th>
+                        <th>Tarih</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var message in Model)
+                    {
+                        <tr class="text-center">
+                            <td>@message.User.Name</td>
+                            <td>@message.Title</td>
+                            <td>@message.Description</td>
+                            <td>@message.CreateAt</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         }
 
     </div>

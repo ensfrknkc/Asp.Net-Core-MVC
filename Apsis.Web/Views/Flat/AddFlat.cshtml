@@ -1,10 +1,12 @@
-﻿@model Flat
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model Flat
 
 
 <h3 class="text-center">Daire Yönetimi</h3>
 <hr />
-
-@await Html.PartialAsync("_TopMenuPartial")
+<br />
 
 
 <div class="row">
@@ -19,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label>Blok</label>
-                <select asp-for="BlockId"  asp-items="@ViewBag.BlockList" class="form-control">
+                <select asp-for="BlockId" asp-items="@ViewBag.BlockList" class="form-control">
                     <option selected disabled>--Blok Seçimi--</option>
                 </select>
             </div>
@@ -45,7 +47,7 @@
             </div>
             <div>
                 <input type="submit" class="btn btn-outline-primary btn-block" value="Ekle" />
-                <a asp-action="Index" class="btn btn-outline-danger btn-block">Vazgeç</a>
+                <a asp-action="Index" asp-controller="Admin" class="btn btn-outline-danger btn-block">Vazgeç</a>
             </div>
         </form>
     </div>
@@ -55,42 +57,41 @@
         <h3 class="text-center">Daireler</h3>
         @if (ViewBag.Flats.Count == 0)
         {
-        <p class="text-center">Henüz eklenmiş daire bulunmamaktadır...</p> }
-        else
+<p class="text-center">Henüz eklenmiş daire bulunmamaktadır...</p> }
+else
+{
+<table class="table">
+    <thead class="bg-dark text-white">
+        <tr class="text-center">
+            <th>Kullanıcı</th>
+            <th>Blok</th>
+            <th>Kat</th>
+            <th>Kapı No</th>
+            <th>Mülkiyet</th>
+            <th>Delete</th>
+            <th>Update</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var flat in ViewBag.Flats)
         {
-        <table class="table">
-            <thead class="bg-dark text-white">
-                <tr class="text-center">
-                    <th>Kullanıcı</th>
-                    <th>Blok</th>
-                    <th>Kat</th>
-                    <th>Kapı No</th>
-                    <th>Mülkiyet</th>
-                    <th>Delete</th>
-                    <th>Update</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var flat in ViewBag.Flats)
-                {
-                <tr class="text-center">
-                    <td>@flat.User.Name</td>
-                    <td>@flat.Block.Name</td>
-                    <td>@flat.Floor</td>
-                    <td>@flat.FlatNo</td>
-                    <td>@flat.OwnerUser</td>
-                    <td>
-                        <a class="btn btn-success" asp-route-flatId="@flat.Id" asp-action="Delete"> Delete</a>
-                    </td>
-                    <td>
-                        <a class="btn btn-success" asp-route-flatId="@flat.Id" asp-action="Update"> Update</a>
-                    </td>
-                </tr>                
+<tr class="text-center">
+    <td>@flat.User.Name</td>
+    <td>@flat.Block.Name</td>
+    <td>@flat.Floor</td>
+    <td>@flat.FlatNo</td>
+    <td>@flat.OwnerUser</td>
+    <td>
+        <a class="btn btn-success" asp-route-flatId="@flat.Id" asp-action="Delete"> Delete</a>
+    </td>
+    <td>
+        <a class="btn btn-success" asp-route-flatId="@flat.Id" asp-action="Update"> Update</a>
+    </td>
+</tr>
                 }
-            </tbody>
-        </table>
-        }
+    </tbody>
+</table>}
     </div>
 </div>
 

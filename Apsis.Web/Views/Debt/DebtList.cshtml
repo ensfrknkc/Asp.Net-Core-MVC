@@ -1,12 +1,14 @@
-﻿@model DebtTotalModel
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model DebtTotalModel
 <h3 class="text-center">Alacak Listesi</h3>
 <hr />
-
-@await Html.PartialAsync("_TopMenuPartial")
+<br />
 <div class="row">
     <div class="col-6">
         <h3 class="text-center">Faturalar</h3>
-        @if(Model.Bill == null)
+        @if (Model.Bill == null)
         {
 <p class="text-center">Ödenmemiş Fatura bulunmamaktadır...</p> }
 else
@@ -30,55 +32,53 @@ else
     <td>@subscription.Month</td>
     <td>@subscription.Year</td>
     <td>@subscription.Status</td>
-</tr>}
+</tr>
+}
     </tbody>
 </table>
-<table class="table">
-    <tr>
-        <td>Toplam:</td>
-        <td>@Model.BillTotal TL</td>
-    </tr>
-</table>
-        }
-        
+                <table class="table">
+                    <tr>
+                        <td>Toplam:</td>
+                        <td>@Model.BillTotal TL</td>
+                    </tr>
+                </table>}
+
     </div>
     <div class="col-6" style="border-left:1px solid black;">
         <h3 class="text-center">Aidatlar</h3>
         @if (Model.Subscription == null)
         {
-    <p class="text-center">Ödenmemiş Aidat bulunmamaktadır...</p> }
+<p class="text-center">Ödenmemiş Aidat bulunmamaktadır...</p> }
 else
 {
-    <table class="table">
-        <thead class="bg-dark text-white">
-            <tr class="text-center">
-                <th>Daire Kullanıcısı</th>
-                <th>Tutar</th>
-                <th>Ay</th>
-                <th>Yıl</th>
-                <th>Durum</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var subscription in Model.Subscription)
-            {
-    <tr class="text-center">
-        <td>@subscription.Flat.User.Name</td>
-        <td>@subscription.Amount</td>
-        <td>@subscription.Month</td>
-        <td>@subscription.Year</td>
-        <td>@subscription.Status</td>
-    </tr>
-}
-        </tbody>
-    </table>
-    <table class="table">
-        <tr>
-            <td>Toplam:</td>
-            <td>@Model.SubscriptionTotal TL</td>
+<table class="table">
+    <thead class="bg-dark text-white">
+        <tr class="text-center">
+            <th>Daire Kullanıcısı</th>
+            <th>Tutar</th>
+            <th>Ay</th>
+            <th>Yıl</th>
+            <th>Durum</th>
         </tr>
-    </table>
-    }
-        
+    </thead>
+    <tbody>
+        @foreach (var subscription in Model.Subscription)
+        {
+<tr class="text-center">
+    <td>@subscription.Flat.User.Name</td>
+    <td>@subscription.Amount</td>
+    <td>@subscription.Month</td>
+    <td>@subscription.Year</td>
+    <td>@subscription.Status</td>
+</tr>}
+    </tbody>
+</table>
+                <table class="table">
+                    <tr>
+                        <td>Toplam:</td>
+                        <td>@Model.SubscriptionTotal TL</td>
+                    </tr>
+                </table>}
+
     </div>
 </div>

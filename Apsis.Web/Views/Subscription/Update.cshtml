@@ -1,13 +1,15 @@
-﻿@model Subscription
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model Subscription
 
-<h3 class="text-center">Aidat Güncelleme</h3>
-<hr />
+<h3 class="text-center">Aidat Güncelle</h3>
+<hr /> <br />
 
-@await Html.PartialAsync("_TopMenuPartial")
 
 <div class="row">
     <div class="col-12">
-        <h3 class="text-center">Aidat Güncelle</h3>
+        
         <form asp-action="Update" method="post">
             <input asp-for="Id" class="form-control" type="hidden" value="@Model.Id" />
             <div class="form-group">

@@ -1,10 +1,12 @@
-﻿@model Bill
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model Bill
 
 
-<h3 class="text-center">Role Yönetimi</h3>
-<hr />
+<h3 class="text-center">Fatura İşlemleri</h3>
+<hr /> <br />
 
-@await Html.PartialAsync("_TopMenuPartial")
 
 
 <div class="row">
@@ -63,41 +65,40 @@
         <h3 class="text-center">Faturalar</h3>
         @if (ViewBag.Bills.Count == 0)
         {
-        <p class="text-center">Henüz eklenmiş Fatura bulunmamaktadır...</p> }
-        else
+<p class="text-center">Henüz eklenmiş Fatura bulunmamaktadır...</p> }
+else
+{
+<table class="table">
+    <thead class="bg-dark text-white">
+        <tr class="text-center">
+            <th>Daire Kullanıcısı</th>
+            <th>Tutar</th>
+            <th>Fatura Tipi</th>
+            <th>Ay</th>
+            <th>Yıl</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bill in ViewBag.Bills)
         {
-        <table class="table">
-            <thead class="bg-dark text-white">
-                <tr class="text-center">
-                    <th>Daire Kullanıcısı</th>
-                    <th>Tutar</th>
-                    <th>Fatura Tipi</th>
-                    <th>Ay</th>
-                    <th>Yıl</th>
-                    <th>Delete</th>
-                    <th>Update</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var bill in ViewBag.Bills)
-                {
-                <tr class="text-center">
-                    <td>@bill.Flat.User.Name</td>
-                    <td>@bill.Amount</td>
-                    <td>@bill.BillType</td>
-                    <td>@bill.Month</td>
-                    <td>@bill.Year</td>
-                    <td>
-                        <a class="btn btn-success" asp-route-billId="@bill.Id" asp-action="Delete"> Delete</a>
-                    </td>
-                    <td>
-                        <a class="btn btn-success" asp-route-billId="@bill.Id" asp-action="Update"> Update</a>
-                    </td>
-                </tr>                
+<tr class="text-center">
+    <td>@bill.Flat.User.Name</td>
+    <td>@bill.Amount</td>
+    <td>@bill.BillType</td>
+    <td>@bill.Month</td>
+    <td>@bill.Year</td>
+    <td>
+        <a class="btn btn-success" asp-route-billId="@bill.Id" asp-action="Delete"> Delete</a>
+    </td>
+    <td>
+        <a class="btn btn-success" asp-route-billId="@bill.Id" asp-action="Update"> Update</a>
+    </td>
+</tr>
                 }
-            </tbody>
-        </table>
-        }
+    </tbody>
+</table>}
     </div>
 </div>
 

@@ -60,7 +60,7 @@ namespace Apsis.Web.Controllers
 
         public async Task<IActionResult> Update(string subscriptionId)
         {
-            List<Subscription> flats = await _unitofWork.Subscription.GetAll();
+            List<Flat> flats = await _unitofWork.Flat.GetAll();
             ViewBag.Flats = new SelectList(flats, "Id", "User.Name");
 
             Subscription subscription = await _unitofWork.Subscription.GetById(x => x.Id == Convert.ToInt32(subscriptionId));

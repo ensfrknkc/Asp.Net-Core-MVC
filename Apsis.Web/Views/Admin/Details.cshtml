@@ -1,11 +1,13 @@
-﻿@model List<string>
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model List<string>
 
 @{ ViewData["Title"] = "Details"; }
 
-<h3 class="text-center">User: <b>@ViewBag.UserName</b></h3>
-<hr />
+<h3 class="text-center">Kullanıcı: <b>@ViewBag.UserName</b></h3>
+<hr /> <br />
 
-@await Html.PartialAsync("_TopMenuPartial")
 
 <div class="container">
     <div class="row">
@@ -20,8 +22,8 @@ else
                 <table class="table">
                     <thead class="bg-dark text-white">
                         <tr>
-                            <th>Role Name</th>
-                            <th>Actions</th>
+                            <th>Rol</th>
+                            <th>Kaldır</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,8 +38,7 @@ else
                    asp-action="RemoveUserRole"
                    onclick="return confirm('Rolü kaldırmaya eminmisiniz?')">Rolü Kaldır</a>
             </td>
-        </tr>
-}
+        </tr>}
                     </tbody>
                 </table>}
         </div>
