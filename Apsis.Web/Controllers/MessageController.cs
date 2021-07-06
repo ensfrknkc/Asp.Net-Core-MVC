@@ -17,20 +17,31 @@ namespace Apsis.Web.Controllers
     {
         private readonly IMessageService _messageService;
         private readonly UserManager<User> _userManager;
-        private readonly IUnitofWork  _uniofWork;
+        private readonly IUnitofWork  _unitofWork;
 
-        public MessageController(IMessageService messageService, UserManager<User> userManager, IUnitofWork uniofWork)
+        public MessageController(IMessageService messageService, UserManager<User> userManager, IUnitofWork unitofWork)
         {
             _messageService = messageService;
             _userManager = userManager;
-            _uniofWork = uniofWork;
+            _unitofWork = unitofWork;
         }
 
         public async Task<IActionResult> Messages()
         {
-            List<Message> messages = await _uniofWork.Message.GetAll();
+            List<Message> messages = await _unitofWork.Message.GetAll();
 
             return View(messages);
+        }
+        public async Task<IActionResult> Delete(string messageId)
+        {
+            Message message = await _unitofWork.Message.GetById(x => x.Id == Convert.ToInt32(messageId));
+            if (message != null)
+            {
+                _unitofWork.Message.Delete(message);
+                await _unitofWork.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Messages");
         }
     }
 }

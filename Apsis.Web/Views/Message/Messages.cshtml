@@ -21,6 +21,7 @@
                         <th>Başlık</th>
                         <th>Açıklama</th>
                         <th>Tarih</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,9 @@
                             <td>@message.Title</td>
                             <td>@message.Description</td>
                             <td>@message.CreateAt</td>
+                            <td>
+                                <a class="btn btn-success" asp-route-messageId="@message.Id" asp-action="Delete"> Delete</a>
+                            </td>
                         </tr>
                     }
                 </tbody>
