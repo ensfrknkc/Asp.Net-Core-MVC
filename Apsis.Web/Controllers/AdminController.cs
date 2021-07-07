@@ -21,12 +21,14 @@ namespace Apsis.Web.Controllers
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IUnitofWork _unitofWork;
 
-        public AdminController( UserManager<User> userManager, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager)
+        public AdminController(IUnitofWork unitofWork, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _unitofWork = unitofWork;
         }
 
         [HttpGet]
@@ -49,8 +51,25 @@ namespace Apsis.Web.Controllers
         }
         public async Task<IActionResult> Delete(string userId)
         {
+            Flat flat = await _unitofWork.Flat.GetById(x => x.UserId == userId);
+            if (flat != null)
+            {
+                List<Bill> bills = await _unitofWork.Bill.Get(x => x.FlatId == flat.Id);
+                foreach (Bill item in bills)
+                {
+                    _unitofWork.Bill.Delete(item);
+                }
+                List<Subscription> subscriptions = await _unitofWork.Subscription.Get(x => x.FlatId == flat.Id);
+                foreach (Subscription item in subscriptions)
+                {
+                    _unitofWork.Subscription.Delete(item);
+                }
+
+                _unitofWork.Flat.Delete(flat);
+            }
             var user = await _userManager.FindByIdAsync(userId);
             await _userManager.DeleteAsync(user);
+            await _unitofWork.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

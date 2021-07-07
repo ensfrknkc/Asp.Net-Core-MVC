@@ -8,6 +8,10 @@
 - Rest API
 - Entity FrameWork Core
 
+<p> Bu proje Apsiyon .NET Core Bootcamp bitirme projesidir. Bootcamp sürecinde katılımcılara desteğini hiç esirgemeyen Kodluyoruz/Patika Ailesine , Eğitmen Murat Genç hocama  ve bu Bootcamp'e sponsor olan Apsiyon şirketine teşekkür ederim.
+
+</p>
+
 ## Admin/Yönetici İşlemleri
 - Daire bilgileri girebilir
 - İkamet den kullanıcı bilgilerini girebilir
