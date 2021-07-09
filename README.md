@@ -1,16 +1,19 @@
-# <center> Bootcamp Bitirme Projesi - Apartman Yönetim Sistemi</center>
+# Bootcamp Bitirme Projesi - Apartman Yönetim Sistemi</center>
 ## Kullanılan Teknolojiler
 - C#
-- ASP .NET CORE 
+- ASP .NET CORE Web Api
 - ASP .NET CORE MVC
 - MSSQL
 - MONGO DB
-- Rest API
-- Entity FrameWork Core
+- Code First / Entity FrameWork Core
+- AutoMapper
 
 <p> Bu proje Apsiyon .NET Core Bootcamp bitirme projesidir. Bootcamp sürecinde katılımcılara desteğini hiç esirgemeyen Kodluyoruz/Patika Ailesine , Eğitmen Murat Genç hocama  ve bu Bootcamp'e sponsor olan Apsiyon şirketine teşekkür ederim.
 
 </p>
+
+## Veritabanı Varlık İlişki Diyagramı
+![Veritabanı Diyagramı](./WebPagePhotos/MsSqlDiagram.PNG)
 
 ## Admin/Yönetici İşlemleri
 - Daire bilgileri girebilir
